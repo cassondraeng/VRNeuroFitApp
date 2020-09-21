@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bce1a5985d8c45640a3bda5c15bc308c, type: 3}
+  m_Name: my_question_strings
+  m_EditorClassIdentifier: 
+  questions:
+  - "When I\u2019m walking, I deliberately notice the sensations of my body moving."
+  - "I\u2019m good at finding words to describe my feelings. "
+  - I criticize myself for having irrational or inappropriate emotions.
+  - 'I perceive my feelings and emotions without having to react to them. '
+  - "When I do things, my mind wanders off and I\u2019m easily distracted. "
+  - When I take a shower or bath, I stay alert to the sensations of water on my body.
+  - 'I can easily put my beliefs, opinions, and expectations into words. '
+  - "I don\u2019t pay attention to what I\u2019m doing because I\u2019m daydreaming,
+    worrying, or otherwise distracted. "
+  - 'I watch my feelings without getting lost in them. '
+  - "I tell myself I shouldn\u2019t be feeling the way I\u2019m feeling. "
+  - 'I notice how foods and drinks affect my thoughts, bodily sensations, and emotions. '
+  - "It\u2019s hard for me to find the words to describe what I\u2019m thinking. "
+  - 'I am easily distracted. '
+  - "I believe some of my thoughts are abnormal or bad and I shouldn\u2019t think
+    that way. "
+  - 'I pay attention to sensations, such as the wind in my hair or sun on my face. '
+  - I have trouble thinking of the right words to express how I feel about things.
+  - 'I make judgments about whether my thoughts are good or bad. '
+  - "I find it difficult to stay focused on what\u2019s happening in the present. "
+  - "When I have distressing thoughts or images, I \u201Cstep back\u201D and am aware
+    of the thought or image without getting taken over by it.  "
+  - 'I pay attention to sounds, such as clocks ticking, birds chirping, or cars passing. '
+  - 'In difficult situations, I can pause without immediately reacting. '
+  - "When I have a sensation in my body, it\u2019s difficult for me to describe it
+    because I can\u2019t find the right words. "
+  - "It seems I am \u201Crunning on automatic\u201D without much awareness of what
+    I\u2019m doing. "
+  - 'When I have distressing thoughts or images, I feel calm soon after. '
+  - "I tell myself that I shouldn\u2019t be thinking the way I\u2019m thinking. "
+  - 'I notice the smells and aromas of things. '
+  - "Even when I\u2019m feeling terribly upset, I can find a way to put it into words. "
+  - 'I rush through activities without being really attentive to them. '
+  - 'When I have distressing thoughts or images I am able just to notice them without
+    reacting. '
+  - "I think some of my emotions are bad or inappropriate and I shouldn\u2019t feel
+    them. "
+  - 'I notice visual elements in art or nature, such as colors, shapes, textures,
+    or patterns of light and shadow. '
+  - 'My natural tendency is to put my experiences into words. '
+  - 'When I have distressing thoughts or images, I just notice them and let them go.  '
+  - "I do jobs or tasks automatically without being aware of what I\u2019m doing. "
+  - 'When I have distressing thoughts or images, I judge myself as good or bad, depending
+    what the thought/image is about. '
+  - 'I pay attention to how my emotions affect my thoughts and behavior. '
+  - 'I can usually describe how I feel at the moment in considerable detail. '
+  - 'I find myself doing things without paying attention. '
+  - 'I disapprove of myself when I have irrational ideas. '

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bce1a5985d8c45640a3bda5c15bc308c, type: 3}
+  m_Name: media_questions
+  m_EditorClassIdentifier: 
+  questions:
+  - Have you played any video games?
+  - How often do you play video games?
+  - Have you played any VR games?
+  - How often do you play VR games?
+  - Have you played Beatsaber?
+  - How often do you play Beatsaber?
