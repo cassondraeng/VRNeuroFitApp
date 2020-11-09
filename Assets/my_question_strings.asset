@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: my_question_strings
   m_EditorClassIdentifier: 
   questions:
-  - "When I\u2019m walking, I deliberately notice the sensations of my body moving."
+  - When I am walking, I deliberately notice the sensations of my body moving.
   - "I\u2019m good at finding words to describe my feelings. "
   - I criticize myself for having irrational or inappropriate emotions.
   - 'I perceive my feelings and emotions without having to react to them. '
@@ -53,7 +53,8 @@ MonoBehaviour:
   - 'I notice visual elements in art or nature, such as colors, shapes, textures,
     or patterns of light and shadow. '
   - 'My natural tendency is to put my experiences into words. '
-  - 'When I have distressing thoughts or images, I just notice them and let them go.  '
+  - 'When I have distressing thoughts or images, I just notice them and let them
+    go.  '
   - "I do jobs or tasks automatically without being aware of what I\u2019m doing. "
   - 'When I have distressing thoughts or images, I judge myself as good or bad, depending
     what the thought/image is about. '

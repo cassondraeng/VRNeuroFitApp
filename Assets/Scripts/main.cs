@@ -369,11 +369,20 @@ public class main : MonoBehaviour
       
       
 
-    var no_commas = questions.questions.Select(s => String.Concat(s.Where<char>(c => c != ',')));
+    var no_commas = questions.questions.Select(s => String.Concat("MIND_",String.Concat(s.Where<char>(c => c != ','))));
     var media_no_commas = MediaQuestions.questions.Select(s => String.Concat(s.Where<char>(c => c != ','))); // new
     DataSaving.StoopHeader = DataSaving.StoopHeader.Concat(no_commas).Concat(media_no_commas).ToArray();
 
-    DataSaving.SaveData(inputSend.happy[(int)HeaderType.ID], inputSend.happy,info.Concat(NotAdrians.happy).Concat(MediaData.happy).ToArray());
+    //Fix up the Mindfulness questions with an additional Prefix
+    /*for(int i = 0; i < NotAdrians.happy.Length; i++)
+    {
+            NotAdrians.happy[i] = String.Concat("MIND_",NotAdrians.happy[i]);
+    }*/
+
+
+    var BetterHappy = CalculateTime(inputSend.happy);
+
+    DataSaving.SaveData(inputSend.happy[(int)HeaderType.ID], BetterHappy,info.Concat(NotAdrians.happy).Concat(MediaData.happy).ToArray());
 
     // Also save single trial data
     DataSaving.SaveLearningCurveData(inputSend.happy[(int)HeaderType.ID], learningCurveDataString);
@@ -402,4 +411,50 @@ public class main : MonoBehaviour
     learningCurveDataString += "\n" + string.Join(",", data);
   }
 
+  private string index2APM(string index)
+  {
+        if (index == "0")
+            return "AM";
+        else
+            return "PM";
+
+  }  
+
+  private string[] CalculateTime(string[] ogHappy)
+  {
+        string startHrs = ogHappy[(int)HeaderType.StartHrs];
+        string startMins = ogHappy[(int)HeaderType.StartMins];
+        string startAPM = ogHappy[(int)HeaderType.StartAPM];
+        string stopHrs = ogHappy[(int)HeaderType.StopHrs];
+        string stopMins = ogHappy[(int)HeaderType.StopMins];
+        string stopAPM = ogHappy[(int)HeaderType.StopAPM];
+
+        string stAPMA = index2APM(startAPM);
+        string stAPMB = index2APM(stopAPM);
+
+        string StartTime = startHrs + ":" + startMins + " " + stAPMA;
+        string StopTime = stopHrs + ":" + stopMins + " " + stAPMB;
+
+        float StartCongregate = float.Parse(startHrs) + (float.Parse(startMins) / 60f);
+        float StopCongregate = float.Parse(stopHrs) + (float.Parse(stopMins) / 60f);
+        float totalSlept;
+        if(startAPM == stopAPM)
+        {
+            totalSlept = StopCongregate - StartCongregate;
+        }
+        else
+        {
+            totalSlept = 12f - StartCongregate + StopCongregate;
+        }
+
+        string[] newHappy = new string[DataSaving.InfoHeader.Length];
+        for(int i = 0; i < newHappy.Length - 3; i++)
+        {
+            newHappy[i] = ogHappy[i];
+        }
+        newHappy[newHappy.Length - 3] = StartTime;
+        newHappy[newHappy.Length - 2] = StopTime;
+        newHappy[newHappy.Length - 1] = totalSlept.ToString();
+        return newHappy;
+  }
 }

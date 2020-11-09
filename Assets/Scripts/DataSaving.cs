@@ -13,10 +13,7 @@ public static class DataSaving {
   static string LearningCurveDataPath = @"ResearchData/LearningCurve/";
 
   // Static strings declared here to ensure consistency for GainsHeader calculations
-  static string Heartrate = "Heartrate";
 	//static string GNG_TotalAccuracy = "TotalAccuracy";
-	static string DN_Incongruent_Accuracy = "Incongruent_Accuracy";
-	static string F_Incongruent_Accuracy = "Incongruent_Accuracy";
 
 	//static string changesInHR = "changesInHR";
 	//static string DN_gains = "DN_gains";
@@ -28,16 +25,18 @@ public static class DataSaving {
 	public static string[] InfoHeader = {
         "ID",                       "Played Before",    "Computer Distance" ,   "DOB",
         "Sex",                      "Race",             "TypeRace",             "Ethnicity",
-        "Year in School",           "Major/Minor",      "GPA/QPA",              "Handedness",
-        "Vision",                   "MinutesSlept",     "Colorblind",           "TypeColorblind",
-        "Disorder",                 "TypeDisorder",     "Physical",             "TypePhysical"};
+        "Year in School",           "Handedness",       "Vision",				"Major",
+		"Minor",					"GPA",				"QPA",					"SAT",
+		"ACT",						"Colorblind",       "TypeColorblind",		"Disorder",
+		"TypeDisorder",				"Exercise",         "TypeExercise",			"SleepTime",
+		"WakeTime",					"HoursSlept"};
 
 
 	// Revised data headers
     //Make one of these for SaveFullTest
 	public static string[] StoopHeader = {					
 		"Congruent_Correct",		"Congruent_Errors",			"Congruent_Accuracy",		"Congruent_RT",
-		"Incongruent_Correct",		"Incongruent_Errors",       DN_Incongruent_Accuracy,	"Incongruent_RT",
+		"Incongruent_Correct",		"Incongruent_Errors",       "Incongruent_Accuracy",		"Incongruent_RT",
         "n_c_trials",               "n_i_trials"
 	};
 
@@ -50,10 +49,10 @@ public static class DataSaving {
   static char[] fieldSeparator = { ',' };
 
 	// Column pre/post/delayed test indices
-	static int DNPreIndex;
-	static int DNPostIndex;
-	static int DNDelayIndex;
-	static int DNDelay2Index;
+	static int SPreIndex;
+	static int SPostIndex;
+	static int SDelayIndex;
+	static int SDelay2Index;
 
 	public static TrialType CurrentTrialType;
 
@@ -107,13 +106,13 @@ public static class DataSaving {
 			Debug.LogError ("Unexpected data array length for Stroop task data saving");
 		}
 	    if (CurrentTrialType == TrialType.Pretest) {
-		    colIndex = DNPreIndex;
+		    colIndex = SPreIndex;
 	    } else if (CurrentTrialType == TrialType.Posttest) {
-		    colIndex = DNPostIndex;
+		    colIndex = SPostIndex;
 	    } else if (CurrentTrialType == TrialType.DelayedTest) {
-		    colIndex = DNDelayIndex;
+		    colIndex = SDelayIndex;
 	    } else if (CurrentTrialType == TrialType.Delayed2Test) {
-		    colIndex = DNDelay2Index;
+		    colIndex = SDelay2Index;
 	    }
 
 		
@@ -210,19 +209,19 @@ public static class DataSaving {
 		header[0] = new string[lineLength];
 
 		// Adding prefixes to headers --- No dashes or commas allowed
-		string[] DN_PreHeader = addPrefix (StoopHeader, "DN_Pre_");
-		string[] DN_PostHeader = addPrefix (StoopHeader, "DN_Post_");
-		string[] DN_DelayHeader = addPrefix (StoopHeader, "DN_Delay_");
-		string[] DN_Delay2Header = addPrefix(StoopHeader, "DN_Delay2_");
+		string[] DN_PreHeader = addPrefix (StoopHeader, "S_Pre_");
+		string[] DN_PostHeader = addPrefix (StoopHeader, "S_Post_");
+		string[] DN_DelayHeader = addPrefix (StoopHeader, "S_Delay_");
+		string[] DN_Delay2Header = addPrefix(StoopHeader, "S_Delay2_");
 
 		// Copy the headers at their correct indices, and store the indices along the way
 		int index = 0;
 		
-		InfoHeader.CopyTo (header [0], index);				index += InfoHeader.Length;				DNPreIndex = index;
+		InfoHeader.CopyTo (header [0], index);				index += InfoHeader.Length;				SPreIndex = index;
 
-		DN_PreHeader.CopyTo (header [0], index);			index += StoopHeader.Length;			DNPostIndex = index;
-		DN_PostHeader.CopyTo (header [0], index);			index += StoopHeader.Length;            DNDelayIndex = index;
-		DN_DelayHeader.CopyTo (header [0], index);			index += StoopHeader.Length;            DNDelay2Index = index;
+		DN_PreHeader.CopyTo (header [0], index);			index += StoopHeader.Length;			SPostIndex = index;
+		DN_PostHeader.CopyTo (header [0], index);			index += StoopHeader.Length;            SDelayIndex = index;
+		DN_DelayHeader.CopyTo (header [0], index);			index += StoopHeader.Length;            SDelay2Index = index;
 		DN_Delay2Header.CopyTo(header[0], index);			index += StoopHeader.Length;
 
 		// Output the final result

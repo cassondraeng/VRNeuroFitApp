@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1172821c5f173431ba83a5ca09f4eb32, type: 3}
   m_Name: media_data
   m_EditorClassIdentifier: 
-  size: 6
   happy:
-  - 2
-  - 
   - 1
+  - 4
+  - 1
+  - 4
+  - 1
+  - 4
