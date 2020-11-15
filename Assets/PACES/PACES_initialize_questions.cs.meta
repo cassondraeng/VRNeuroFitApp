@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 92d40da19d26d184cbcfd50a7af96f28
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - strings: {fileID: 11400000, guid: a64f07e314c3b0f4dbeecea5ddd5c584, type: 2}
+  - types: {fileID: 11400000, guid: adb6bd8aa117cd14497092b2e9cc084f, type: 2}
+  - questionTypeOne_prefab: {fileID: 729947479332653737, guid: 8d5715a13704fcc4ebeba235be7075fc,
+      type: 3}
+  - questionTypeTwo_prefab: {fileID: 3751141678443140857, guid: 1c210b0ba45fb7b4cb8c3ba454610668,
+      type: 3}
+  - next_button: {fileID: 6694338624691085253, guid: c4df25dbe2f14464ca1658056f37cc95,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
