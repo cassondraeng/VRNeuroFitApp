@@ -1035,7 +1035,7 @@ MonoBehaviour:
     type: 3}
   next_button: {fileID: 6694338624691085253, guid: c4df25dbe2f14464ca1658056f37cc95,
     type: 3}
-  scene_to_go_to: MediaQuestionnaire
+  scene_to_go_to: LOBBY
   shouldSaveData: 0
 --- !u!1 &2020953766
 GameObject:

@@ -7945,7 +7945,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &541278334
 Transform:
   m_ObjectHideFlags: 0
@@ -17493,7 +17493,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1278687450}
-        m_MethodName: change
+        m_MethodName: Jump
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17548,9 +17548,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1278687445}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ef292ec1f13a4e409ae92665b2db118, type: 3}
+  m_Script: {fileID: 11500000, guid: 416d50618b401b74b9a08f6ac63a96bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scene: LOBBY
 --- !u!1 &1280628777
 GameObject:
   m_ObjectHideFlags: 0
@@ -22097,7 +22098,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: To Questionnaire
+  m_Text: Back to Lobby
 --- !u!222 &1591626290
 CanvasRenderer:
   m_ObjectHideFlags: 0
