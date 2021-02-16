@@ -9,8 +9,6 @@ public class StartStroop : MonoBehaviour
     void Start()
     {
         GameObject WEEEE = GameObject.Find("Script");
-        magicMain = GetComponent<main>();
-        magicMain.start_test;
     }
 
     // Update is called once per frame

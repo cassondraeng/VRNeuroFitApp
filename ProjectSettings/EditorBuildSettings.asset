@@ -14,4 +14,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MediaQuestionnaire.unity
     guid: b27af2874a8d5ae48839c54657eb8e6a
+  - enabled: 1
+    path: Assets/Scenes/LOBBY.unity
+    guid: d85bef703ff02764fa1667015f7b923a
+  - enabled: 1
+    path: Assets/Scenes/INTRO.unity
+    guid: 360dd2d2cdb29c84686591681970ad97
+  - enabled: 1
+    path: Assets/Scenes/DEMOGRAPHICS.unity
+    guid: 785dc3682d163ad47be8f3693d9e910d
+  - enabled: 1
+    path: Assets/Scenes/Attention-Task.unity
+    guid: 6d22208887527ef48a349345e4bbf382
   m_configObjects: {}

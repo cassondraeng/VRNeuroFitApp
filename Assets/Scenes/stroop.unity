@@ -3986,15 +3986,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 187064347}
-        m_MethodName: SetTrigger
-        m_Mode: 5
+      - m_Target: {fileID: 1046036466}
+        m_MethodName: Jump
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Pre-Info
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &245847193
@@ -13851,6 +13851,7 @@ GameObject:
   - component: {fileID: 1046036463}
   - component: {fileID: 1046036465}
   - component: {fileID: 1046036464}
+  - component: {fileID: 1046036466}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -13908,7 +13909,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: To Info Input
+  m_Text: Back to Lobby
 --- !u!222 &1046036465
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13917,6 +13918,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1046036462}
   m_CullTransparentMesh: 0
+--- !u!114 &1046036466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046036462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416d50618b401b74b9a08f6ac63a96bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: LOBBY
 --- !u!1 &1058381646
 GameObject:
   m_ObjectHideFlags: 0
