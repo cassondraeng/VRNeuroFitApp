@@ -6,4 +6,12 @@ using UnityEngine;
 public class boolVal : ScriptableObject
 {
     public bool val;
+
+    public void swapVal() {
+        val = !val;
+    }
+
+    public void setTrue() {
+        val = true;
+    }
 }
