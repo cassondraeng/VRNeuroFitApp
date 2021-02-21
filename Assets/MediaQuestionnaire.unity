@@ -268,7 +268,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2030680223}
   m_HandleRect: {fileID: 2030680222}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -964,7 +964,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5172549, y: 0}
   m_AnchorMax: {x: 0.5172549, y: 0}
-  m_AnchoredPosition: {x: 50, y: 0}
+  m_AnchoredPosition: {x: -32.83618, y: 0}
   m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1969241554
@@ -1039,6 +1039,7 @@ MonoBehaviour:
     type: 3}
   scene_to_go_to: LOBBY
   shouldSaveData: 1
+  updateBool: {fileID: 11400000, guid: 01290f00e1f8ab946b42067b0dd858f7, type: 2}
 --- !u!1 &2020953766
 GameObject:
   m_ObjectHideFlags: 0

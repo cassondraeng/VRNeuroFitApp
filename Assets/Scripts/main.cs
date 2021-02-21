@@ -435,8 +435,16 @@ public class main : MonoBehaviour
         string StartTime = startHrs + ":" + startMins + " " + stAPMA;
         string StopTime = stopHrs + ":" + stopMins + " " + stAPMB;
 
-        float StartCongregate = float.Parse(startHrs) + (float.Parse(startMins) / 60f);
-        float StopCongregate = float.Parse(stopHrs) + (float.Parse(stopMins) / 60f);
+        float StartCongregate;
+        if (startHrs == "" || startMins == "")
+            StartCongregate = -1f;
+        else 
+            StartCongregate = float.Parse(startHrs) + (float.Parse(startMins) / 60f);
+        float StopCongregate;
+        if (stopHrs == "" || startMins == "")
+            StopCongregate = -1f;
+        else
+            StopCongregate = float.Parse(stopHrs) + (float.Parse(stopMins) / 60f);
         float totalSlept;
         if(startAPM == stopAPM)
         {

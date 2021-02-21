@@ -11,6 +11,7 @@ public class initialize_questions : MonoBehaviour
     [SerializeField] private Button next_button;
     [SerializeField] string scene_to_go_to;
     [SerializeField] private bool shouldSaveData;
+    [SerializeField] private boolVal changeBool;
     
     // Start is called before the first frame update
     void Start()
@@ -42,6 +43,7 @@ public class initialize_questions : MonoBehaviour
             
             //create a csv and call Save
             SceneManager.LoadScene(scene_to_go_to);
+            changeBool.setTrue();
         });
         
     }
