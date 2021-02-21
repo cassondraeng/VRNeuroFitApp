@@ -1,15 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ToggleEnable : MonoBehaviour
 {
 
-    [SerializeField] private boolVal val;
+    [SerializeField] private main.track trackingVal;
 
-    // Update is called once per frame
-    void Update()
-    {
-        gameObject.SetActive(val.val);
+    private main script;
+
+    private Image myImage;
+
+    private void Start() {
+        script = GameObject.Find("Script").GetComponent<main>();
+        myImage = GetComponent<Image>();
+
+        myImage.enabled = script.banana[(int)trackingVal];
     }
 }

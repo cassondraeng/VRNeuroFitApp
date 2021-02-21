@@ -6228,6 +6228,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2093035521}
+        m_MethodName: SetTest
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &359773542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25787,6 +25798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0352677f9ae6a7e4586b7bf37f6d3a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  banana: 0000000000000000
   Cross: {fileID: 813260277}
   WordManager: {fileID: 1086969594}
   Correct: {fileID: 35352455}
@@ -30805,9 +30817,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 496ae2040dd1eb049aa57f13b16e0a7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pre: {fileID: 11400000, guid: 580be8ae51d464e41bbd89853b8169ef, type: 2}
-  post: {fileID: 11400000, guid: 96efe5fe504324848aa76a8b70b1840c, type: 2}
-  dropdown: {fileID: 0}
 --- !u!114 &2093035522
 MonoBehaviour:
   m_ObjectHideFlags: 0

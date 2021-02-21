@@ -12,11 +12,13 @@ public class media_initialize_questions : MonoBehaviour
     [SerializeField] private Button next_button;
     [SerializeField] string scene_to_go_to;
     [SerializeField] private bool shouldSaveData;
-    [SerializeField] private boolVal updateBool;
-    
+    [SerializeField] private main.track trackingVal;
+
+    private main script;
     // Start is called before the first frame update
     void Start()
     {
+        script = GameObject.Find("Script").GetComponent<main>();
         StartCoroutine(spawner());
     }
 
@@ -66,7 +68,7 @@ public class media_initialize_questions : MonoBehaviour
             
             //create a csv and call Save
             SceneManager.LoadScene(scene_to_go_to);
-            updateBool.setTrue();
+            script.setTrue(trackingVal);
         });
         
     }

@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
+
+
+
 //Struct stroop holds onto text and color values yayyyy
 public class Stroop
 {
@@ -31,6 +34,16 @@ public struct trialInfo
 
 public class main : MonoBehaviour
 {
+
+    #region ProgressTracking
+
+    public enum track { Pretest, PostTest, Stroop, Attention, Media, Mindful, PACES, Demographics };
+    public bool[] banana = new bool[8];
+
+    public void setTrue(track track) {
+        banana[(int)track] = true;
+    }
+    #endregion
 
     //Objects interacted with to present stroop words
     public GameObject Cross;

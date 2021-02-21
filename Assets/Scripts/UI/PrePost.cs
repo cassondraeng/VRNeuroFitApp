@@ -5,19 +5,22 @@ using UnityEngine.UI;
 
 public class PrePost : MonoBehaviour
 {
-    [SerializeField] private boolVal pre;
-    [SerializeField] private boolVal post;
 
-    [SerializeField] private Dropdown dropdown;
+    private Dropdown dropdown;
+    private main script;
 
     private void Start() {
         dropdown = GetComponent<Dropdown>();
+        script = GameObject.Find("Script").GetComponent<main>();
+        if(script == null) {
+            Debug.LogError("[PrePost] Failure to find the main script!");
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        post.val = dropdown.value == 1;
-        pre.val = dropdown.value == 0;
+    public void SetTest() {
+        if (dropdown.value == 0)
+            script.setTrue(main.track.Pretest);
+        else /* dropdown. value == 1*/
+            script.setTrue(main.track.PostTest);
     }
 }
