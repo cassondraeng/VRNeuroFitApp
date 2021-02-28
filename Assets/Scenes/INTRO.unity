@@ -25813,6 +25813,8 @@ MonoBehaviour:
   MediaQuestions: {fileID: 11400000, guid: 03505481e0fa19e4293028ba562df8fb, type: 2}
   AttentionData: {fileID: 11400000, guid: 7efb6d0dc0bdde646afad0c6e5182f86, type: 2}
   AttentionQuestions: {fileID: 11400000, guid: 0bb660d3e40db7b449bf4dead2e35889, type: 2}
+  PacesData: {fileID: 11400000, guid: a3b1515761b06c144a1bf8a401c4f140, type: 2}
+  PacesQuestions: {fileID: 11400000, guid: a64f07e314c3b0f4dbeecea5ddd5c584, type: 2}
   ExperimenterInput: {fileID: 1713281496}
   PlayerInput: {fileID: 653898864}
   trialCount: 0

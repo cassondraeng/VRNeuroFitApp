@@ -71,6 +71,8 @@ public class main : MonoBehaviour
     public questionaire_strings MediaQuestions; // new
     public InputSend AttentionData; // new
     public questionaire_strings AttentionQuestions; // new
+    public InputSend PacesData; // new
+    public questionaire_strings PacesQuestions; // new
 
     //Objects interacted with to record experiment info (credentials, user info)
     public GameObject ExperimenterInput;
@@ -112,7 +114,7 @@ public class main : MonoBehaviour
     void Start()
     {
         if (WordManager != null) WordManager.text = "";
-        DontDestroyOnLoad(this);
+        if (S == this) DontDestroyOnLoad(this);
     }
 
     private void buildTrial(int con, int incon)
@@ -404,12 +406,13 @@ public class main : MonoBehaviour
         var no_commas = S.questions.questions.Select(s => String.Concat("MIND_",String.Concat(s.Where<char>(c => c != ','))));
         var media_no_commas = S.MediaQuestions.questions.Select(s => String.Concat("MediaUse_",String.Concat(s.Where<char>(c => c != ',')))); //new
         var attention_no_commas = S.AttentionQuestions.questions.Select(s => String.Concat("AT_",String.Concat(s.Where<char>(c => c != ',')))); //new
+        var paces_no_commas = S.PacesQuestions.questions.Select(s => String.Concat("PACES_",String.Concat(s.Where<char>(c => c != ',')))); //new
 
-        DataSaving.StoopHeader = media_no_commas.Concat(no_commas).Concat(DataSaving.StoopHeader).Concat(attention_no_commas).ToArray();
+        DataSaving.StoopHeader = media_no_commas.Concat(paces_no_commas).Concat(no_commas).Concat(DataSaving.StoopHeader).Concat(attention_no_commas).ToArray();
 
         var BetterHappy = CalculateTime(S.inputSend.happy, track.Pretest);
 
-        DataSaving.SavePreData(S.inputSend.happy[(int)HeaderType.ID], BetterHappy, S.MediaData.happy.Concat(S.NotAdrians.happy).Concat(info).Concat(S.AttentionData.happy).ToArray());
+        DataSaving.SavePreData(S.inputSend.happy[(int)HeaderType.ID], BetterHappy, S.MediaData.happy.Concat(S.PacesData.happy).Concat(S.NotAdrians.happy).Concat(info).Concat(S.AttentionData.happy).ToArray());
 
     } else if (preOrPost == track.PostTest) {
         // stroop, attention, paces, mindfulness, demographics
@@ -424,12 +427,13 @@ public class main : MonoBehaviour
         var no_commas = S.questions.questions.Select(s => String.Concat("MIND_",String.Concat(s.Where<char>(c => c != ','))));
         var media_no_commas = S.MediaQuestions.questions.Select(s => String.Concat("MediaUse_",String.Concat(s.Where<char>(c => c != ',')))); //new
         var attention_no_commas = S.AttentionQuestions.questions.Select(s => String.Concat("AT_",String.Concat(s.Where<char>(c => c != ',')))); //new
+        var paces_no_commas = S.PacesQuestions.questions.Select(s => String.Concat("PACES_",String.Concat(s.Where<char>(c => c != ',')))); //new
 
-        DataSaving.StoopHeader = DataSaving.StoopHeader.Concat(attention_no_commas).Concat(no_commas).ToArray();
+        DataSaving.StoopHeader = DataSaving.StoopHeader.Concat(attention_no_commas).Concat(paces_no_commas).Concat(no_commas).ToArray();
 
         var BetterHappy = CalculateTime(S.inputSend.happy, track.PostTest);
 
-        DataSaving.SavePostData(S.inputSend.happy[(int)HeaderType.ID], BetterHappy, info.Concat(S.AttentionData.happy).Concat(S.NotAdrians.happy).ToArray());
+        DataSaving.SavePostData(S.inputSend.happy[(int)HeaderType.ID], BetterHappy, info.Concat(S.AttentionData.happy).Concat(S.PacesData.happy).Concat(S.NotAdrians.happy).ToArray());
     }  
       
 

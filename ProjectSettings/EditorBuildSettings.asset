@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Attention-Task.unity
     guid: 6d22208887527ef48a349345e4bbf382
+  - enabled: 1
+    path: Assets/PACES/PACESQuestionnaire.unity
+    guid: a33683f279f6ca545af2e58d8b32fff1
   m_configObjects: {}

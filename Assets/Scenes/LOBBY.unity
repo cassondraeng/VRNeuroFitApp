@@ -678,6 +678,8 @@ MonoBehaviour:
   MediaQuestions: {fileID: 11400000, guid: 03505481e0fa19e4293028ba562df8fb, type: 2}
   AttentionData: {fileID: 11400000, guid: 7efb6d0dc0bdde646afad0c6e5182f86, type: 2}
   AttentionQuestions: {fileID: 11400000, guid: 0bb660d3e40db7b449bf4dead2e35889, type: 2}
+  PacesData: {fileID: 0}
+  PacesQuestions: {fileID: 0}
   ExperimenterInput: {fileID: 0}
   PlayerInput: {fileID: 0}
   trialCount: 0
@@ -3996,7 +3998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a976c62fc904dda43b3c3fb34e6f0c31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trackingVal: 4
+  trackingVal: 6
 --- !u!1 &1792561510
 GameObject:
   m_ObjectHideFlags: 0

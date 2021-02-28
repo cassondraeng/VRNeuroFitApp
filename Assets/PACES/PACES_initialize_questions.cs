@@ -12,7 +12,7 @@ public class PACES_initialize_questions : MonoBehaviour
     [SerializeField] private GameObject questionTypeTwo_prefab;
     [SerializeField] private Button next_button;
     [SerializeField] string scene_to_go_to;
-    [SerializeField] private bool shouldSaveData;
+    // [SerializeField] private bool shouldSaveData;
 
     // Start is called before the first frame update
     void Start()
@@ -44,13 +44,15 @@ public class PACES_initialize_questions : MonoBehaviour
 
         Instantiate(next_button, transform).onClick.AddListener(() =>
         {
-            if (shouldSaveData)
-            {
-                var main = FindObjectOfType<main>();
-                main.saveFullTest();
-                Destroy(main);
-            }
+            // if (shouldSaveData)
+            // // {
+            // //     var main = FindObjectOfType<main>();
+            // //     main.saveFullTest();
+            // //     Destroy(main);
+            // }
 
+            main script = GameObject.Find("Script").GetComponent<main>();
+            script.setTrue(main.track.PACES);
             //create a csv and call Save
             SceneManager.LoadScene(scene_to_go_to);
         });

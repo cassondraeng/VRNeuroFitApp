@@ -352,9 +352,9 @@ public static class DataSaving {
 			Directory.CreateDirectory (@"ResearchData");
 		}
 
-		if (!File.Exists (@"ResearchData/PreTestData.csv")) {
-			Debug.Log ("@\"ResearchData/PreTestData.csv\" file does not yet exist. Creating it...");
-			FileStream fs = File.Create (@"ResearchData/PreTestData.csv");
+		if (!File.Exists (@"ResearchData/BatteryPreTestData.csv")) {
+			Debug.Log ("@\"ResearchData/BatteryPreTestData.csv\" file does not yet exist. Creating it...");
+			FileStream fs = File.Create (@"ResearchData/BatteryPreTestData.csv");
 			fs.Close ();
 		}
 
@@ -369,9 +369,9 @@ public static class DataSaving {
 			Directory.CreateDirectory (@"ResearchData");
 		}
 
-		if (!File.Exists (@"ResearchData/PostTestData.csv")) {
-			Debug.Log ("@\"ResearchData/PostTestData.csv\" file does not yet exist. Creating it...");
-			FileStream fs = File.Create (@"ResearchData/PostTestData.csv");
+		if (!File.Exists (@"ResearchData/BatteryPostTestData.csv")) {
+			Debug.Log ("@\"ResearchData/BatteryPostTestData.csv\" file does not yet exist. Creating it...");
+			FileStream fs = File.Create (@"ResearchData/BatteryPostTestData.csv");
 			fs.Close ();
 		}
 

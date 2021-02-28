@@ -61,9 +61,9 @@ public class media_initialize_questions : MonoBehaviour
         Instantiate(next_button, transform).onClick.AddListener(() =>
         {
             if (shouldSaveData) {
-                var main = FindObjectOfType<main>();
-                main.saveFullTest();
-                Destroy(main);
+                // var main = FindObjectOfType<main>();
+                // main.saveFullTest();
+                // Destroy(main);
             }
             
             //create a csv and call Save
