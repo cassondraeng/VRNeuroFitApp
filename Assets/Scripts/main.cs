@@ -42,6 +42,17 @@ public class main : MonoBehaviour
 
     public void setTrue(track track) {
         banana[(int)track] = true;
+
+        // Check if we want to save and quit
+        if (banana[(int)main.track.Pretest]) {
+            if (banana[(int)main.track.Media] && banana[(int)main.track.PACES] && banana[(int)main.track.Mindful] && banana[(int)main.track.Stroop] && banana[(int)main.track.Attention])
+            // media exposure, paces, mindfulness, stroop, attention
+            saveFullTest();
+        } else if (banana[(int)main.track.PostTest]) {
+            if (banana[(int)main.track.Stroop] && banana[(int)main.track.Attention] && banana[(int)main.track.PACES] && banana[(int)main.track.Mindful] && banana[(int)main.track.Demographics])
+            // stroop, attention, paces, mindfulness, demographics
+            saveFullTest();
+        }
     }
     #endregion
 
@@ -54,10 +65,12 @@ public class main : MonoBehaviour
     public GameObject RestScreen;
     public GameObject NextScreen;
     public InputSend inputSend;
-    public InputSend NotAdrians;
+    public InputSend NotAdrians; //mindfulness
     public InputSend MediaData; // new
-    public questionaire_strings questions;
+    public questionaire_strings questions; //mindfulness
     public questionaire_strings MediaQuestions; // new
+    public InputSend AttentionData; // new
+    public questionaire_strings AttentionQuestions; // new
 
     //Objects interacted with to record experiment info (credentials, user info)
     public GameObject ExperimenterInput;
@@ -79,6 +92,9 @@ public class main : MonoBehaviour
     private Color[] colors = { Color.red, Color.green, Color.cyan, Color.yellow };
     private string[] words = { "RED", "GREEN", "BLUE", "YELLOW" };
 
+    //Singleton
+    public static main S;
+
     private string RGBYtoString(Color c)
     {
         if (c == Color.red) return "red";
@@ -88,11 +104,14 @@ public class main : MonoBehaviour
         else return "";
     }
 
+    void Awake() {
+        if (S == null) S = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        WordManager.text = "";
+        if (WordManager != null) WordManager.text = "";
         DontDestroyOnLoad(this);
     }
 
@@ -328,6 +347,7 @@ public class main : MonoBehaviour
   // Save the averaged data over ALL trials and ALL blocks of this test
   public void saveFullTest() {
     // Save the full test data
+    track preOrPost = S.banana[(int)main.track.Pretest] == true ? track.Pretest : track.PostTest;
 
         //Data to collect throughout running of algorithm
         int c_c = 0;
@@ -341,7 +361,7 @@ public class main : MonoBehaviour
         //5*48 (160 congruent, 80 incongruent)
         int n_c_trials = 160;
         int n_i_trials = 80;
-        foreach(trialInfo[] t in blocks)
+        foreach(trialInfo[] t in S.blocks)
         {
             foreach(trialInfo i in t)
             {
@@ -375,30 +395,47 @@ public class main : MonoBehaviour
         // etc.
         DateTime timeStart, timeStop = DateTime.Today;
 
-      DataSaving.sex = inputSend.happy[(int) HeaderType.Sex];
-      DataSaving.version = "n/a";
-      DataSaving.birthdate = inputSend.happy[(int) HeaderType.DOB];
-      DataSaving.computerDistance = inputSend.happy[(int) HeaderType.Computer_Distance];
+
+    // Save diff data for pre or post
+    if (preOrPost == track.Pretest) {
+        // media exposure, paces, mindfulness, stroop, attention
+        DataSaving.computerDistance = S.inputSend.happy[(int) HeaderType.Computer_Distance];
+
+        var no_commas = S.questions.questions.Select(s => String.Concat("MIND_",String.Concat(s.Where<char>(c => c != ','))));
+        var media_no_commas = S.MediaQuestions.questions.Select(s => String.Concat("MediaUse_",String.Concat(s.Where<char>(c => c != ',')))); //new
+        var attention_no_commas = S.AttentionQuestions.questions.Select(s => String.Concat("AT_",String.Concat(s.Where<char>(c => c != ',')))); //new
+
+        DataSaving.StoopHeader = media_no_commas.Concat(no_commas).Concat(DataSaving.StoopHeader).Concat(attention_no_commas).ToArray();
+
+        var BetterHappy = CalculateTime(S.inputSend.happy, track.Pretest);
+
+        DataSaving.SavePreData(S.inputSend.happy[(int)HeaderType.ID], BetterHappy, S.MediaData.happy.Concat(S.NotAdrians.happy).Concat(info).Concat(S.AttentionData.happy).ToArray());
+
+    } else if (preOrPost == track.PostTest) {
+        // stroop, attention, paces, mindfulness, demographics
+        //TODO: add paces
+
+        // Demographics data?
+        DataSaving.sex = S.inputSend.happy[(int) HeaderType.Sex];
+        DataSaving.version = "n/a";
+        DataSaving.birthdate = S.inputSend.happy[(int) HeaderType.DOB];
+        DataSaving.computerDistance = S.inputSend.happy[(int) HeaderType.Computer_Distance];
+
+        var no_commas = S.questions.questions.Select(s => String.Concat("MIND_",String.Concat(s.Where<char>(c => c != ','))));
+        var media_no_commas = S.MediaQuestions.questions.Select(s => String.Concat("MediaUse_",String.Concat(s.Where<char>(c => c != ',')))); //new
+        var attention_no_commas = S.AttentionQuestions.questions.Select(s => String.Concat("AT_",String.Concat(s.Where<char>(c => c != ',')))); //new
+
+        DataSaving.StoopHeader = DataSaving.StoopHeader.Concat(attention_no_commas).Concat(no_commas).ToArray();
+
+        var BetterHappy = CalculateTime(S.inputSend.happy, track.PostTest);
+
+        DataSaving.SavePostData(S.inputSend.happy[(int)HeaderType.ID], BetterHappy, info.Concat(S.AttentionData.happy).Concat(S.NotAdrians.happy).ToArray());
+    }  
       
-      
-
-    var no_commas = questions.questions.Select(s => String.Concat("MIND_",String.Concat(s.Where<char>(c => c != ','))));
-    var media_no_commas = MediaQuestions.questions.Select(s => String.Concat(s.Where<char>(c => c != ','))); // new
-    DataSaving.StoopHeader = DataSaving.StoopHeader.Concat(no_commas).Concat(media_no_commas).ToArray();
-
-    //Fix up the Mindfulness questions with an additional Prefix
-    /*for(int i = 0; i < NotAdrians.happy.Length; i++)
-    {
-            NotAdrians.happy[i] = String.Concat("MIND_",NotAdrians.happy[i]);
-    }*/
-
-
-    var BetterHappy = CalculateTime(inputSend.happy);
-
-    DataSaving.SaveData(inputSend.happy[(int)HeaderType.ID], BetterHappy,info.Concat(NotAdrians.happy).Concat(MediaData.happy).ToArray());
 
     // Also save single trial data
-    DataSaving.SaveLearningCurveData(inputSend.happy[(int)HeaderType.ID], learningCurveDataString);
+    DataSaving.SaveLearningCurveData(S.inputSend.happy[(int)HeaderType.ID], 
+    S.learningCurveDataString);
     learningCurveDataString = "";
   }
 
@@ -433,7 +470,7 @@ public class main : MonoBehaviour
 
   }  
 
-  private string[] CalculateTime(string[] ogHappy)
+  private string[] CalculateTime(string[] ogHappy, track preOrPost)
   {
         string startHrs = ogHappy[(int)HeaderType.StartHrs];
         string startMins = ogHappy[(int)HeaderType.StartMins];
@@ -468,7 +505,10 @@ public class main : MonoBehaviour
             totalSlept = 12f - StartCongregate + StopCongregate;
         }
 
-        string[] newHappy = new string[DataSaving.InfoHeader.Length];
+        string[] newHappy;
+        if (preOrPost == track.Pretest) newHappy = new string[DataSaving.InfoHeaderPre.Length];
+        else newHappy = new string[DataSaving.InfoHeaderPost.Length];
+
         for(int i = 0; i < newHappy.Length - 3; i++)
         {
             newHappy[i] = ogHappy[i];

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 enum practice_screen {None, Target, Catch};
 
@@ -26,6 +27,7 @@ public class input_manager : MonoBehaviour {
     [SerializeField] GameObject practice_wrong_catch;
     [SerializeField] GameObject outro;
     [SerializeField] GameObject outro_practice;
+    [SerializeField] InputSend Attention_Task_data;
 
     //Data tracking variables
     public static List<float> reaction_times_search;
@@ -321,19 +323,34 @@ public class input_manager : MonoBehaviour {
         // Uncomment this to enable data saving to local file
         // this.GetComponent<data_saver>().Save(info, comprehension_enabled);
 
-        this.GetComponent<data_saver>().CreateDatabaseObject(
-            total_time,
-            corr_target,
-            wrong_target + timeout_target,
-            div(corr_target, 16),
-            average_search_rt,
-            corr_catch,
-            wrong_catch + timeout_catch,
-            div(corr_catch, 8),
-            average_catch_rt,
-            corr_catch + corr_target,
-            wrong_catch + wrong_target + timeout_catch + timeout_target
-        );
+        Attention_Task_data.set_happy((HeaderType) 0, total_time);
+        Attention_Task_data.set_happy((HeaderType) 1, corr_target);
+        Attention_Task_data.set_happy((HeaderType) 2, wrong_target + timeout_target);
+        Attention_Task_data.set_happy((HeaderType) 3, div(corr_target, 16));
+        Attention_Task_data.set_happy((HeaderType) 4, average_search_rt);
+        Attention_Task_data.set_happy((HeaderType) 5, corr_catch);
+        Attention_Task_data.set_happy((HeaderType) 6, wrong_catch + timeout_catch);
+        Attention_Task_data.set_happy((HeaderType) 7, div(corr_catch, 8));
+        Attention_Task_data.set_happy((HeaderType) 8, average_catch_rt);
+        Attention_Task_data.set_happy((HeaderType) 9, corr_catch + corr_target);
+        Attention_Task_data.set_happy((HeaderType) 10, wrong_catch + wrong_target + timeout_catch + timeout_target);
+
+        main script = GameObject.Find("Script").GetComponent<main>();
+        script.setTrue(main.track.Attention);
+        SceneManager.LoadScene("LOBBY");
+        // this.GetComponent<data_saver>().CreateDatabaseObject(
+        //     total_time,
+        //     corr_target,
+        //     wrong_target + timeout_target,
+        //     div(corr_target, 16),
+        //     average_search_rt,
+        //     corr_catch,
+        //     wrong_catch + timeout_catch,
+        //     div(corr_catch, 8),
+        //     average_catch_rt,
+        //     corr_catch + corr_target,
+        //     wrong_catch + wrong_target + timeout_catch + timeout_target
+        // );
     
     }
 }

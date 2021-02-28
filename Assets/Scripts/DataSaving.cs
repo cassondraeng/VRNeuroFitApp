@@ -8,8 +8,10 @@ public enum TrialType {Pretest, Posttest, DelayedTest, Delayed2Test, Showcase};
 
 
 public static class DataSaving {
-	static string DataFilePath = @"ResearchData/PrePostTestData.csv"; // If you change this, make sure to adjust the writeData method accordingly
-	static string BackupStroopDataPath = @"ResearchData/BackupStroopData/";
+	static string DataFilePathPre = @"ResearchData/BatteryPreTestData.csv"; // If you change this, make sure to adjust the writeData method accordingly
+	static string DataFilePathPost = @"ResearchData/BatteryPostTestData.csv"; // If you change this, make sure to adjust the writeData method accordingly
+	static string BackupStroopDataPathPre = @"ResearchData/PreBackupStroopData/";
+	static string BackupStroopDataPathPost = @"ResearchData/PostBackupStroopData/";
   static string LearningCurveDataPath = @"ResearchData/LearningCurve/";
 
   // Static strings declared here to ensure consistency for GainsHeader calculations
@@ -22,7 +24,11 @@ public static class DataSaving {
 
 	// Task Data Headers -- NO IN-STRING COMMAS ALLOWED (And NO DASHES)
     //This is for the player info hahahahahaha
-	public static string[] InfoHeader = {
+	public static string[] InfoHeaderPre = {
+        "ID",                       "Played Before",    "Computer Distance",
+		"SleepTime",                "WakeTime",         "HoursSlept" };
+
+	public static string[] InfoHeaderPost = {
         "ID",                       "Played Before",    "Computer Distance" ,   "DOB",
         "Sex",                      "Race",             "TypeRace",             "Ethnicity",
         "Year in School",           "Handedness",       "Vision",				"Major",
@@ -35,9 +41,9 @@ public static class DataSaving {
 	// Revised data headers
     //Make one of these for SaveFullTest
 	public static string[] StoopHeader = {					
-		"Congruent_Correct",		"Congruent_Errors",			"Congruent_Accuracy",		"Congruent_RT",
-		"Incongruent_Correct",		"Incongruent_Errors",       "Incongruent_Accuracy",		"Incongruent_RT",
-        "n_c_trials",               "n_i_trials"
+		"S_Congruent_Correct",		"S_Congruent_Errors",			"S_Congruent_Accuracy",		"S_Congruent_RT",
+		"S_Incongruent_Correct",		"S_Incongruent_Errors",       "S_Incongruent_Accuracy",		"S_Incongruent_RT",
+        "S_n_c_trials",               "S_n_i_trials"
 	};
 
   static string[] LearningCurveHeader = { "word name", "ink color", "c/ic", "tablerow number", "pressed key",
@@ -63,7 +69,7 @@ public static class DataSaving {
 
 
 	// Call this to save trial data into the .csv file
-	public static void SaveData(string ID, string[] infoData, string[] newData) {
+	public static void SavePreData(string ID, string[] infoData, string[] newData) {
 		if (CurrentTrialType == TrialType.Showcase) {
 			return;
 		}
@@ -75,11 +81,11 @@ public static class DataSaving {
 		//string[] newInfoArray = createInfoArray (ID);
 
 		// Save backup of the data
-		SaveBackup (ID, infoData, newData);
+		SaveBackupPre (ID, infoData, newData);
 
 		// Read the current data and make sure the header is correct
-		string[][] AllData = readCSVFile (DataFilePath);
-		makeDataHeader ().CopyTo (AllData, 0);
+		string[][] AllData = readCSVFile (DataFilePathPre);
+		makeDataHeaderPre().CopyTo (AllData, 0);
 
 		// Get ID
 		int lineIndex = findID (AllData, ID);
@@ -105,15 +111,15 @@ public static class DataSaving {
 		if (newData.Length != StoopHeader.Length) {
 			Debug.LogError ("Unexpected data array length for Stroop task data saving");
 		}
-	    if (CurrentTrialType == TrialType.Pretest) {
+	    // if (CurrentTrialType == TrialType.Pretest) {
 		    colIndex = SPreIndex;
-	    } else if (CurrentTrialType == TrialType.Posttest) {
-		    colIndex = SPostIndex;
-	    } else if (CurrentTrialType == TrialType.DelayedTest) {
-		    colIndex = SDelayIndex;
-	    } else if (CurrentTrialType == TrialType.Delayed2Test) {
-		    colIndex = SDelay2Index;
-	    }
+	    // } else if (CurrentTrialType == TrialType.Posttest) {
+		//     colIndex = SPostIndex;
+	    // } else if (CurrentTrialType == TrialType.DelayedTest) {
+		//     colIndex = SDelayIndex;
+	    // } else if (CurrentTrialType == TrialType.Delayed2Test) {
+		//     colIndex = SDelay2Index;
+	    // }
 
 		
 
@@ -123,7 +129,70 @@ public static class DataSaving {
 
 		// Write it to the file
 		string dataString = convert2DToString(AllData);
-		writeData(dataString);
+		writeDataPre(dataString);
+	}
+
+	public static void SavePostData(string ID, string[] infoData, string[] newData) {
+		if (CurrentTrialType == TrialType.Showcase) {
+			return;
+		}
+
+		if (string.Equals (ID, "")) {
+			ID = "(No ID entered)";
+		}
+
+		//string[] newInfoArray = createInfoArray (ID);
+
+		// Save backup of the data
+		SaveBackupPost (ID, infoData, newData);
+
+		// Read the current data and make sure the header is correct
+		string[][] AllData = readCSVFile (DataFilePathPost);
+		makeDataHeaderPost ().CopyTo (AllData, 0);
+
+		// Get ID
+		int lineIndex = findID (AllData, ID);
+
+		// If ID not found in the previous data, save in a new line
+		// and save infoData
+		if (lineIndex < 0) {
+			string[][] newAllData = new string[AllData.Length + 1][];
+			AllData.CopyTo (newAllData, 0);
+
+			string[] newLine = new string[ AllData[0].Length ];
+			lineIndex = newAllData.Length - 1;
+			newAllData [lineIndex] = newLine;
+			infoData.CopyTo (newAllData [lineIndex], 0);
+
+			AllData = newAllData;
+		}
+
+
+		// Find the column index for the data, and check if the newData is the right length
+		int colIndex = 0;
+		
+		if (newData.Length != StoopHeader.Length) {
+			Debug.LogError ("Unexpected data array length for Stroop task data saving");
+		}
+	    // if (CurrentTrialType == TrialType.Pretest) {
+		//     colIndex = SPreIndex;
+	    // } else if (CurrentTrialType == TrialType.Posttest) {
+		    colIndex = SPostIndex;
+	    // } else if (CurrentTrialType == TrialType.DelayedTest) {
+		//     colIndex = SDelayIndex;
+	    // } else if (CurrentTrialType == TrialType.Delayed2Test) {
+		//     colIndex = SDelay2Index;
+	    // }
+
+		
+
+		// Copy into the data array
+		newData.CopyTo (AllData [lineIndex], colIndex);
+
+
+		// Write it to the file
+		string dataString = convert2DToString(AllData);
+		writeDataPost(dataString);
 	}
 
 
@@ -161,68 +230,96 @@ public static class DataSaving {
 	}
 
 	// Create the info array
-	private static string[] createInfoArray (string ID) {
-		string[] infoArray = new string[InfoHeader.Length];
+	// private static string[] createInfoArray (string ID) {
+	// 	string[] infoArray = new string[InfoHeader.Length];
 
-		int i = 0;
-		infoArray [i] = ID;					i++;
-		infoArray [i] = version;			i++;
-		infoArray [i] = birthdate;			i++;
+	// 	int i = 0;
+	// 	infoArray [i] = ID;					i++;
+	// 	infoArray [i] = version;			i++;
+	// 	infoArray [i] = birthdate;			i++;
 
-		DateTime result;
-		if (DateTime.TryParse (birthdate, out result)) {
-			// Compute age
-			DateTime today = DateTime.Today;
-			TimeSpan dayDiff = today.Subtract (result);
-			double years = dayDiff.TotalDays / 365.25;
-			infoArray [i] = years.ToString ("##.###");
-		} else {
-			infoArray [i] = "";
-		}
-		i++;
+	// 	DateTime result;
+	// 	if (DateTime.TryParse (birthdate, out result)) {
+	// 		// Compute age
+	// 		DateTime today = DateTime.Today;
+	// 		TimeSpan dayDiff = today.Subtract (result);
+	// 		double years = dayDiff.TotalDays / 365.25;
+	// 		infoArray [i] = years.ToString ("##.###");
+	// 	} else {
+	// 		infoArray [i] = "";
+	// 	}
+	// 	i++;
 
-		infoArray [i] = sex;				i++;
-		infoArray [i] = computerDistance;	i++; 
+	// 	infoArray [i] = sex;				i++;
+	// 	infoArray [i] = computerDistance;	i++; 
 
-		// Reset the global strings
-		version = "";
-		birthdate = "";
-		sex = "";
-		computerDistance = "";
+	// 	// Reset the global strings
+	// 	version = "";
+	// 	birthdate = "";
+	// 	sex = "";
+	// 	computerDistance = "";
 
-		// Make SURE there are no commas
-		for (int j = 0; j < infoArray.Length; j++) {
+	// 	// Make SURE there are no commas
+	// 	for (int j = 0; j < infoArray.Length; j++) {
 			
-			Debug.Log($"j = {j}, arr[j]: {infoArray[j]}");
-			infoArray[j] = infoArray[j]?.Replace(',', ' ');
-		}
+	// 		Debug.Log($"j = {j}, arr[j]: {infoArray[j]}");
+	// 		infoArray[j] = infoArray[j]?.Replace(',', ' ');
+	// 	}
 
-		return infoArray;
-	}
+	// 	return infoArray;
+	// }
 
 
 	// Set up the header for the data CSV
-	private static string[][] makeDataHeader() {
+	private static string[][] makeDataHeaderPre() {
 		string[][] header = new string[1][];
 		//int lineLength = InfoHeader.Length + GainsHeader.Length + (StoopHeader.Length + GoNoGoHeader.Length + FlankerHeader.Length) * 4;
-		int lineLength = InfoHeader.Length + (StoopHeader.Length) * 4;
+		int lineLength = InfoHeaderPre.Length + (StoopHeader.Length) * 1;
 		header[0] = new string[lineLength];
 
 		// Adding prefixes to headers --- No dashes or commas allowed
-		string[] DN_PreHeader = addPrefix (StoopHeader, "S_Pre_");
-		string[] DN_PostHeader = addPrefix (StoopHeader, "S_Post_");
-		string[] DN_DelayHeader = addPrefix (StoopHeader, "S_Delay_");
-		string[] DN_Delay2Header = addPrefix(StoopHeader, "S_Delay2_");
+		string[] DN_PreHeader = addPrefix (StoopHeader, "Pre_");
+		// string[] DN_PostHeader = addPrefix (StoopHeader, "S_Post_");
+		// string[] DN_DelayHeader = addPrefix (StoopHeader, "S_Delay_");
+		// string[] DN_Delay2Header = addPrefix(StoopHeader, "S_Delay2_");
 
 		// Copy the headers at their correct indices, and store the indices along the way
 		int index = 0;
 		
-		InfoHeader.CopyTo (header [0], index);				index += InfoHeader.Length;				SPreIndex = index;
+		InfoHeaderPre.CopyTo (header [0], index);				index += InfoHeaderPre.Length;				SPreIndex = index;
 
-		DN_PreHeader.CopyTo (header [0], index);			index += StoopHeader.Length;			SPostIndex = index;
-		DN_PostHeader.CopyTo (header [0], index);			index += StoopHeader.Length;            SDelayIndex = index;
-		DN_DelayHeader.CopyTo (header [0], index);			index += StoopHeader.Length;            SDelay2Index = index;
-		DN_Delay2Header.CopyTo(header[0], index);			index += StoopHeader.Length;
+		DN_PreHeader.CopyTo (header [0], index); //			index += StoopHeader.Length;			SPostIndex = index;
+		// DN_PostHeader.CopyTo (header [0], index);			index += StoopHeader.Length;            SDelayIndex = index;
+		// DN_DelayHeader.CopyTo (header [0], index);			index += StoopHeader.Length;            SDelay2Index = index;
+		// DN_Delay2Header.CopyTo(header[0], index);			index += StoopHeader.Length;
+
+		// Output the final result
+		return header;
+	}
+
+	// Set up the header for the data CSV
+	private static string[][] makeDataHeaderPost() {
+		string[][] header = new string[1][];
+		//int lineLength = InfoHeader.Length + GainsHeader.Length + (StoopHeader.Length + GoNoGoHeader.Length + FlankerHeader.Length) * 4;
+		int lineLength = InfoHeaderPost.Length + (StoopHeader.Length) * 1;
+		header[0] = new string[lineLength];
+
+		// Adding prefixes to headers --- No dashes or commas allowed
+		// string[] DN_PreHeader = addPrefix (StoopHeader, "S_Pre_");
+		string[] DN_PostHeader = addPrefix (StoopHeader, "Post_");
+		// string[] DN_DelayHeader = addPrefix (StoopHeader, "S_Delay_");
+		// string[] DN_Delay2Header = addPrefix(StoopHeader, "S_Delay2_");
+
+		// Copy the headers at their correct indices, and store the indices along the way
+		int index = 0;
+		
+		InfoHeaderPost.CopyTo (header [0], index);				index += InfoHeaderPost.Length;				//SPreIndex = index;
+
+		//DN_PreHeader.CopyTo (header [0], index);			index += StoopHeader.Length;			
+		SPostIndex = index;
+		DN_PostHeader.CopyTo (header [0], index);			//index += StoopHeader.Length;            SDelayIndex = index;
+		// DN_DelayHeader.CopyTo (header [0], index);			index += StoopHeader.Length;            SDelay2Index = index;
+		// DN_Delay2Header.CopyTo(header[0], index);			index += StoopHeader.Length;
 
 		// Output the final result
 		return header;
@@ -249,32 +346,64 @@ public static class DataSaving {
 	}
 
 	// Write the input string to the DataFilePath
-	private static void writeData (string dataString) {
+	private static void writeDataPre (string dataString) {
 		if (!Directory.Exists (@"ResearchData")) {
 			Debug.Log ("@\"ResearchData/\" folder does not yet exist. Creating it...");
 			Directory.CreateDirectory (@"ResearchData");
 		}
 
-		if (!File.Exists (@"ResearchData/PrePostTestData.csv")) {
-			Debug.Log ("@\"ResearchData/PrePostTestData.csv\" file does not yet exist. Creating it...");
-			FileStream fs = File.Create (@"ResearchData/PrePostTestData.csv");
+		if (!File.Exists (@"ResearchData/PreTestData.csv")) {
+			Debug.Log ("@\"ResearchData/PreTestData.csv\" file does not yet exist. Creating it...");
+			FileStream fs = File.Create (@"ResearchData/PreTestData.csv");
 			fs.Close ();
 		}
 
-		File.WriteAllText (DataFilePath, dataString);
+		File.WriteAllText (DataFilePathPre, dataString);
+		Debug.Log ("Trial data successfully saved");
+	}
+
+		// Write the input string to the DataFilePath
+	private static void writeDataPost (string dataString) {
+		if (!Directory.Exists (@"ResearchData")) {
+			Debug.Log ("@\"ResearchData/\" folder does not yet exist. Creating it...");
+			Directory.CreateDirectory (@"ResearchData");
+		}
+
+		if (!File.Exists (@"ResearchData/PostTestData.csv")) {
+			Debug.Log ("@\"ResearchData/PostTestData.csv\" file does not yet exist. Creating it...");
+			FileStream fs = File.Create (@"ResearchData/PostTestData.csv");
+			fs.Close ();
+		}
+
+		File.WriteAllText (DataFilePathPost, dataString);
 		Debug.Log ("Trial data successfully saved");
 	}
 
 	// Save the new line of data to the backup folder for the kiddo
-	private static void SaveBackup (string ID, string[] infoLine, string[] newData) {
+	private static void SaveBackupPre (string ID, string[] infoLine, string[] newData) {
 		string infoString = string.Join (",", infoLine);
 		string dataString = string.Join (",", newData);
 
 		dataString = string.Concat (infoString, ",", CurrentTrialType.ToString(), ",", dataString, "\n");
 
-		string path = BackupStroopDataPath + ID + ".csv";
+		string path = BackupStroopDataPathPre + ID + ".csv";
 		if (!File.Exists (path)) {
-			Directory.CreateDirectory (BackupStroopDataPath);
+			Directory.CreateDirectory (BackupStroopDataPathPre);
+		}
+		File.AppendAllText (path, dataString);
+		Debug.Log ("Backup Stroop data saved");
+  }
+
+  	// Save the new line of data to the backup folder for the kiddo
+	private static void SaveBackupPost (string ID, string[] infoLine, string[] newData) {
+		string infoString = string.Join (",", infoLine);
+		string dataString = string.Join (",", newData);
+
+		dataString = string.Concat (infoString, ",", CurrentTrialType.ToString(), ",", dataString, "\n");
+
+		string path = BackupStroopDataPathPost + ID + ".csv";
+		if (!File.Exists (path)) {
+			Directory.CreateDirectory (BackupStroopDataPathPost);
 		}
 		File.AppendAllText (path, dataString);
 		Debug.Log ("Backup Stroop data saved");
