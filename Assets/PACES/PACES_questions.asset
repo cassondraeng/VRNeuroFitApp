@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: PACES_questions
   m_EditorClassIdentifier: 
   questions:
+  - '       Disagree a lot                    Disagree                          Neither                          
+    Agree                         Agree a lot'
   - I enjoy it
   - I feel bored
   - I don't like it
@@ -22,10 +24,10 @@ MonoBehaviour:
   - It makes me sad
   - It's very pleasant
   - My body feels good
+  - I get something out of it
   - It's very exciting
   - It frustrates me
   - It's not at all interesting
-  - I feel good about myself
-  - It makes me happy
-  - I feel like I have to do the activity
-  - I think I am good at it
+  - It gives me a strong feeling of success
+  - It feels good
+  - I feel as though I would rather be doing something else

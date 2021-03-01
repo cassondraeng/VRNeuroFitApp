@@ -30,11 +30,11 @@ public class PACES_initialize_questions : MonoBehaviour
             var q = Instantiate(new GameObject());
             if (types.indexes[i] == 0)
             {
-                q = Instantiate(questionTypeOne_prefab, transform);
+                q = Instantiate(questionTypeTwo_prefab, transform);
             }
             else
             {
-                q = Instantiate(questionTypeTwo_prefab, transform);
+                q = Instantiate(questionTypeOne_prefab, transform);
             }
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>());
