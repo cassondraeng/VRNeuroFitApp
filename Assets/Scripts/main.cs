@@ -412,11 +412,11 @@ public class main : MonoBehaviour
 
         var BetterHappy = CalculateTime(S.inputSend.happy, track.Pretest);
 
-        DataSaving.SavePreData(S.inputSend.happy[(int)HeaderType.ID], BetterHappy, S.MediaData.happy.Concat(S.PacesData.happy).Concat(S.NotAdrians.happy).Concat(info).Concat(S.AttentionData.happy).ToArray());
+        DataSaving.CurrentTrialType = TrialType.Pretest;
+        DataSaving.SaveData(S.inputSend.happy[(int)HeaderType.ID], BetterHappy, S.MediaData.happy.Concat(S.PacesData.happy).Concat(S.NotAdrians.happy).Concat(info).Concat(S.AttentionData.happy).ToArray());
 
     } else if (preOrPost == track.PostTest) {
         // stroop, attention, paces, mindfulness, demographics
-        //TODO: add paces
 
         // Demographics data?
         DataSaving.sex = S.inputSend.happy[(int) HeaderType.Sex];
@@ -433,7 +433,8 @@ public class main : MonoBehaviour
 
         var BetterHappy = CalculateTime(S.inputSend.happy, track.PostTest);
 
-        DataSaving.SavePostData(S.inputSend.happy[(int)HeaderType.ID], BetterHappy, info.Concat(S.AttentionData.happy).Concat(S.PacesData.happy).Concat(S.NotAdrians.happy).ToArray());
+        DataSaving.CurrentTrialType = TrialType.Posttest;
+        DataSaving.SaveData(S.inputSend.happy[(int)HeaderType.ID], BetterHappy, info.Concat(S.AttentionData.happy).Concat(S.PacesData.happy).Concat(S.NotAdrians.happy).ToArray());
     }  
       
 
