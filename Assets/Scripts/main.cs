@@ -408,7 +408,8 @@ public class main : MonoBehaviour
         var attention_no_commas = S.AttentionQuestions.questions.Select(s => String.Concat("AT_",String.Concat(s.Where<char>(c => c != ',')))); //new
         var paces_no_commas = S.PacesQuestions.questions.Select(s => String.Concat("PACES_",String.Concat(s.Where<char>(c => c != ',')))); //new
 
-        DataSaving.StoopHeader = media_no_commas.Concat(paces_no_commas).Concat(no_commas).Concat(DataSaving.StoopHeader).Concat(attention_no_commas).ToArray();
+        var oldHeader = DataSaving.StoopHeader;
+        DataSaving.StoopHeader = media_no_commas.Concat(paces_no_commas).Concat(no_commas).Concat(oldHeader).Concat(attention_no_commas).ToArray();
 
         var BetterHappy = CalculateTime(S.inputSend.happy, track.Pretest);
 
@@ -429,7 +430,8 @@ public class main : MonoBehaviour
         var attention_no_commas = S.AttentionQuestions.questions.Select(s => String.Concat("AT_",String.Concat(s.Where<char>(c => c != ',')))); //new
         var paces_no_commas = S.PacesQuestions.questions.Select(s => String.Concat("PACES_",String.Concat(s.Where<char>(c => c != ',')))); //new
 
-        DataSaving.StoopHeader = DataSaving.StoopHeader.Concat(attention_no_commas).Concat(paces_no_commas).Concat(no_commas).ToArray();
+        var oldHeader = DataSaving.StoopHeader;
+        DataSaving.StoopHeader = oldHeader.Concat(attention_no_commas).Concat(paces_no_commas).Concat(no_commas).ToArray();
 
         var BetterHappy = CalculateTime(S.inputSend.happy, track.PostTest);
 
