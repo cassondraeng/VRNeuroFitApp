@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: cecbadd26c61ac548b489db15d513ee1,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -5662,7 +5663,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 95, y: 30.149998}
+  m_AnchoredPosition: {x: 0, y: 30.149998}
   m_SizeDelta: {x: 190.12, y: 40.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &345024367
@@ -5795,7 +5796,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -15}
+  m_AnchoredPosition: {x: 0, y: -31.6}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &359773541
@@ -5849,7 +5850,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Start Game
+          m_StringArgument: Start Test
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1714567470}
@@ -7838,7 +7839,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &536083352
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8524,7 +8525,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 20}
+  m_AnchoredPosition: {x: -0.0000076294, y: -26.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &584203596
@@ -21948,8 +21949,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -115, y: 30}
-  m_SizeDelta: {x: 230, y: 40}
+  m_AnchoredPosition: {x: -0.000000039552, y: 91.984985}
+  m_SizeDelta: {x: 230, y: 83.37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1586153693
 MonoBehaviour:
@@ -21971,18 +21972,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: fe6960f43d303463c956ed491e78ae7c, type: 3}
-    m_FontSize: 30
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 5
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Played Before: '
+  m_Text: Have you played Stroop before?
 --- !u!222 &1586153694
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25050,6 +25051,10 @@ MonoBehaviour:
   MediaData: {fileID: 11400000, guid: 189e0955e8c38ae4097aa02369857e1f, type: 2}
   questions: {fileID: 11400000, guid: b475818d537f6a74280b4090c1acb84e, type: 2}
   MediaQuestions: {fileID: 11400000, guid: 03505481e0fa19e4293028ba562df8fb, type: 2}
+  AttentionData: {fileID: 0}
+  AttentionQuestions: {fileID: 0}
+  PacesData: {fileID: 0}
+  PacesQuestions: {fileID: 0}
   ExperimenterInput: {fileID: 1713281496}
   PlayerInput: {fileID: 653898864}
   trialCount: 0
@@ -30734,7 +30739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2145735068
 RectTransform:
   m_ObjectHideFlags: 0
