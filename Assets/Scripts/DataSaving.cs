@@ -39,7 +39,13 @@ public static class DataSaving {
 
 	// Revised data headers
     //Make one of these for SaveFullTest
-	public static string[] StoopHeader = {					
+	public static string[] StoopHeaderPre = {					
+		"S_Congruent_Correct",		"S_Congruent_Errors",			"S_Congruent_Accuracy",		"S_Congruent_RT",
+		"S_Incongruent_Correct",		"S_Incongruent_Errors",       "S_Incongruent_Accuracy",		"S_Incongruent_RT",
+        "S_n_c_trials",               "S_n_i_trials"
+	};
+
+	public static string[] StoopHeaderPost = {					
 		"S_Congruent_Correct",		"S_Congruent_Errors",			"S_Congruent_Accuracy",		"S_Congruent_RT",
 		"S_Incongruent_Correct",		"S_Incongruent_Errors",       "S_Incongruent_Accuracy",		"S_Incongruent_RT",
         "S_n_c_trials",               "S_n_i_trials"
@@ -115,12 +121,15 @@ public static class DataSaving {
 		// Find the column index for the data, and check if the newData is the right length
 		int colIndex = 0;
 		
-		if (newData.Length != StoopHeader.Length) {
-			Debug.LogError ("Unexpected data array length for Stroop task data saving");
-		}
 	    if (CurrentTrialType == TrialType.Pretest) {
+			if (newData.Length != StoopHeaderPre.Length) {
+				Debug.LogError ("Unexpected data array length for Stroop task data saving");
+			}
 		    colIndex = SPreIndex;
 	    } else if (CurrentTrialType == TrialType.Posttest) {
+			if (newData.Length != StoopHeaderPost.Length) {
+				Debug.LogError ("Unexpected data array length for Stroop task data saving");
+			}
 		    colIndex = SPostIndex;
 			// copies posttest DEMOGRAPHIC data here
 			infoData.CopyTo (AllData [lineIndex], InfoHeaderPre.Length);
@@ -221,12 +230,12 @@ public static class DataSaving {
 		//int lineLength = InfoHeader.Length + GainsHeader.Length + (StoopHeader.Length + GoNoGoHeader.Length + FlankerHeader.Length) * 4;
 
 		// Add length of pretest data and then post test
-		int lineLength = InfoHeaderPre.Length + InfoHeaderPost.Length + (StoopHeader.Length) * 1 + (StoopHeader.Length) * 1;
+		int lineLength = InfoHeaderPre.Length + InfoHeaderPost.Length + (StoopHeaderPre.Length) * 1 + (StoopHeaderPost.Length) * 1;
 		header[0] = new string[lineLength];
 
 		// Adding prefixes to headers --- No dashes or commas allowed
-		string[] DN_PreHeader = addPrefix (StoopHeader, "Pre_");
-		string[] DN_PostHeader = addPrefix (StoopHeader, "Post_");
+		string[] DN_PreHeader = addPrefix (StoopHeaderPre, "Pre_");
+		string[] DN_PostHeader = addPrefix (StoopHeaderPost, "Post_");
 		// string[] DN_DelayHeader = addPrefix (StoopHeader, "S_Delay_");
 		// string[] DN_Delay2Header = addPrefix(StoopHeader, "S_Delay2_");
 
@@ -240,10 +249,10 @@ public static class DataSaving {
 		index += InfoHeaderPost.Length;
 		SPreIndex = index;
 		DN_PreHeader.CopyTo (header [0], index);
-		index += StoopHeader.Length;
+		index += StoopHeaderPre.Length;
 		SPostIndex = index;
 		DN_PostHeader.CopyTo (header [0], index);
-		index += StoopHeader.Length;
+		index += StoopHeaderPost.Length;
 		
 		//index += StoopHeader.Length;            SDelayIndex = index;
 		// DN_DelayHeader.CopyTo (header [0], index);			index += StoopHeader.Length;            SDelay2Index = index;

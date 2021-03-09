@@ -397,18 +397,24 @@ public class main : MonoBehaviour
         DateTime timeStart, timeStop = DateTime.Today;
 
 
-    // Save diff data for pre or post
-    if (preOrPost == track.Pretest) {
-        // media exposure, paces, mindfulness, stroop, attention
-        DataSaving.computerDistance = S.inputSend.happy[(int) HeaderType.Computer_Distance];
 
+        // Initialize data headers
         var no_commas = S.questions.questions.Select(s => String.Concat("MIND_",String.Concat(s.Where<char>(c => c != ','))));
         var media_no_commas = S.MediaQuestions.questions.Select(s => String.Concat("MediaUse_",String.Concat(s.Where<char>(c => c != ',')))); //new
         var attention_no_commas = S.AttentionQuestions.questions.Select(s => String.Concat("AT_",String.Concat(s.Where<char>(c => c != ',')))); //new
         var paces_no_commas = S.PacesQuestions.questions.Select(s => String.Concat("PACES_",String.Concat(s.Where<char>(c => c != ',')))); //new
 
-        var oldHeader = DataSaving.StoopHeader;
-        DataSaving.StoopHeader = media_no_commas.Concat(paces_no_commas).Concat(no_commas).Concat(oldHeader).Concat(attention_no_commas).ToArray();
+        var oldPreHeader = DataSaving.StoopHeaderPre;
+        DataSaving.StoopHeaderPre = media_no_commas.Concat(paces_no_commas).Concat(no_commas).Concat(oldPreHeader).Concat(attention_no_commas).ToArray();
+
+        var oldPostHeader = DataSaving.StoopHeaderPost;
+        DataSaving.StoopHeaderPost = oldPostHeader.Concat(attention_no_commas).Concat(paces_no_commas).Concat(no_commas).ToArray();
+
+
+    // Save diff data for pre or post
+    if (preOrPost == track.Pretest) {
+        // media exposure, paces, mindfulness, stroop, attention
+        DataSaving.computerDistance = S.inputSend.happy[(int) HeaderType.Computer_Distance];
 
         var BetterHappy = S.inputSend.happy.Take(3).ToArray();
         // var BetterHappy = CalculateTime(S.inputSend.happy, track.Pretest);
@@ -424,14 +430,6 @@ public class main : MonoBehaviour
         DataSaving.version = "n/a";
         DataSaving.birthdate = S.inputSend.happy[(int) HeaderType.DOB];
         DataSaving.computerDistance = S.inputSend.happy[(int) HeaderType.Computer_Distance];
-
-        var no_commas = S.questions.questions.Select(s => String.Concat("MIND_",String.Concat(s.Where<char>(c => c != ','))));
-        var media_no_commas = S.MediaQuestions.questions.Select(s => String.Concat("MediaUse_",String.Concat(s.Where<char>(c => c != ',')))); //new
-        var attention_no_commas = S.AttentionQuestions.questions.Select(s => String.Concat("AT_",String.Concat(s.Where<char>(c => c != ',')))); //new
-        var paces_no_commas = S.PacesQuestions.questions.Select(s => String.Concat("PACES_",String.Concat(s.Where<char>(c => c != ',')))); //new
-
-        var oldHeader = DataSaving.StoopHeader;
-        DataSaving.StoopHeader = oldHeader.Concat(attention_no_commas).Concat(paces_no_commas).Concat(no_commas).ToArray();
 
         var BetterHappy = CalculateTime(S.inputSend.happy, track.PostTest);
         var newHappy = BetterHappy.Skip(3).ToArray();
