@@ -10,7 +10,7 @@ public enum TrialType {Pretest, Posttest, DelayedTest, Delayed2Test, Showcase};
 public static class DataSaving {
 	static string DataFilePath = @"ResearchData/BatteryTestData.csv"; // If you change this, make sure to adjust the writeData method accordingly
 	// static string DataFilePathPost = @"ResearchData/BatteryPostTestData.csv"; // If you change this, make sure to adjust the writeData method accordingly
-	static string BackupStroopDataPath = @"ResearchData/BackupStroopData/";
+	static string BackupStroopDataPath = @"ResearchData/BackupBatteryTestData/";
 	// static string BackupStroopDataPathPost = @"ResearchData/PostBackupStroopData/";
   static string LearningCurveDataPath = @"ResearchData/LearningCurve/";
 
@@ -88,6 +88,7 @@ public static class DataSaving {
 
 		// Get ID
 		int lineIndex = findID (AllData, ID);
+		bool containsID = true;
 
 		// If ID not found in the previous data, save in a new line
 		// and save infoData
@@ -99,7 +100,13 @@ public static class DataSaving {
 			string[] newLine = new string[ AllData[0].Length ];
 			lineIndex = newAllData.Length - 1;
 			newAllData [lineIndex] = newLine;
-			infoData.CopyTo (newAllData [lineIndex], 0);
+
+			if (CurrentTrialType == TrialType.Posttest) {
+				newAllData[lineIndex][0] = ID;
+				// Only copy the ID over for the post test
+			} else {
+				infoData.CopyTo (newAllData [lineIndex], 0);
+			}
 
 			AllData = newAllData;
 		}

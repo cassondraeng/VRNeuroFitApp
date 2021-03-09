@@ -410,7 +410,7 @@ public class main : MonoBehaviour
         var oldHeader = DataSaving.StoopHeader;
         DataSaving.StoopHeader = media_no_commas.Concat(paces_no_commas).Concat(no_commas).Concat(oldHeader).Concat(attention_no_commas).ToArray();
 
-        var BetterHappy = (string[]) S.inputSend.happy.Take(3);
+        var BetterHappy = S.inputSend.happy.Take(3).ToArray();
         // var BetterHappy = CalculateTime(S.inputSend.happy, track.Pretest);
 
         DataSaving.CurrentTrialType = TrialType.Pretest;
@@ -434,10 +434,10 @@ public class main : MonoBehaviour
         DataSaving.StoopHeader = oldHeader.Concat(attention_no_commas).Concat(paces_no_commas).Concat(no_commas).ToArray();
 
         var BetterHappy = CalculateTime(S.inputSend.happy, track.PostTest);
-        BetterHappy = (string[]) BetterHappy.Skip(3);
+        var newHappy = BetterHappy.Skip(3).ToArray();
 
         DataSaving.CurrentTrialType = TrialType.Posttest;
-        DataSaving.SaveData(S.inputSend.happy[(int)HeaderType.ID], BetterHappy, info.Concat(S.AttentionData.happy).Concat(S.PacesData.happy).Concat(S.NotAdrians.happy).ToArray());
+        DataSaving.SaveData(S.inputSend.happy[(int)HeaderType.ID], newHappy, info.Concat(S.AttentionData.happy).Concat(S.PacesData.happy).Concat(S.NotAdrians.happy).ToArray());
     }
       
 
