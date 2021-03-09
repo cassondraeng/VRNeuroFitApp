@@ -91,6 +91,7 @@ public static class DataSaving {
 
 		// If ID not found in the previous data, save in a new line
 		// and save infoData
+		// NOTE: copies pretest data here
 		if (lineIndex < 0) {
 			string[][] newAllData = new string[AllData.Length + 1][];
 			AllData.CopyTo (newAllData, 0);
@@ -114,6 +115,8 @@ public static class DataSaving {
 		    colIndex = SPreIndex;
 	    } else if (CurrentTrialType == TrialType.Posttest) {
 		    colIndex = SPostIndex;
+			// copies posttest DEMOGRAPHIC data here
+			infoData.CopyTo (AllData [lineIndex], InfoHeaderPre.Length);
 	    } // else if (CurrentTrialType == TrialType.DelayedTest) {
 		//     colIndex = SDelayIndex;
 	    // } else if (CurrentTrialType == TrialType.Delayed2Test) {
