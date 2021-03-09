@@ -9,7 +9,6 @@ using UnityEngine.UI;
 
 
 
-
 //Struct stroop holds onto text and color values yayyyy
 public class Stroop
 {
@@ -411,7 +410,8 @@ public class main : MonoBehaviour
         var oldHeader = DataSaving.StoopHeader;
         DataSaving.StoopHeader = media_no_commas.Concat(paces_no_commas).Concat(no_commas).Concat(oldHeader).Concat(attention_no_commas).ToArray();
 
-        var BetterHappy = CalculateTime(S.inputSend.happy, track.Pretest);
+        var BetterHappy = (string[]) S.inputSend.happy.Take(3);
+        // var BetterHappy = CalculateTime(S.inputSend.happy, track.Pretest);
 
         DataSaving.CurrentTrialType = TrialType.Pretest;
         DataSaving.SaveData(S.inputSend.happy[(int)HeaderType.ID], BetterHappy, S.MediaData.happy.Concat(S.PacesData.happy).Concat(S.NotAdrians.happy).Concat(info).Concat(S.AttentionData.happy).ToArray());
@@ -434,10 +434,11 @@ public class main : MonoBehaviour
         DataSaving.StoopHeader = oldHeader.Concat(attention_no_commas).Concat(paces_no_commas).Concat(no_commas).ToArray();
 
         var BetterHappy = CalculateTime(S.inputSend.happy, track.PostTest);
+        BetterHappy = (string[]) BetterHappy.Skip(3);
 
         DataSaving.CurrentTrialType = TrialType.Posttest;
         DataSaving.SaveData(S.inputSend.happy[(int)HeaderType.ID], BetterHappy, info.Concat(S.AttentionData.happy).Concat(S.PacesData.happy).Concat(S.NotAdrians.happy).ToArray());
-    }  
+    }
       
 
     // Also save single trial data

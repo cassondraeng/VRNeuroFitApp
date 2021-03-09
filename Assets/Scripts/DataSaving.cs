@@ -25,12 +25,11 @@ public static class DataSaving {
 	// Task Data Headers -- NO IN-STRING COMMAS ALLOWED (And NO DASHES)
     //This is for the player info hahahahahaha
 	public static string[] InfoHeaderPre = {
-        "ID",                       "Played Before",    "Computer Distance",
-		"SleepTime",                "WakeTime",         "HoursSlept" };
+        "ID",                       "Played Before",    "Computer Distance"};
 
 	public static string[] InfoHeaderPost = {
-        "ID",                       "Played Before",    "Computer Distance" ,   "DOB",
-        "Sex",                      "Race",             "TypeRace",             "Ethnicity",
+        "DOB",
+        "Sex",                      "Race",             "RaceOther",             "Ethnicity",
         "Year in School",           "Handedness",       "Vision",				"Major",
 		"Minor",					"GPA",				"QPA",					"SAT",
 		"ACT",						"Colorblind",       "TypeColorblind",		"Disorder",
@@ -212,7 +211,7 @@ public static class DataSaving {
 		//int lineLength = InfoHeader.Length + GainsHeader.Length + (StoopHeader.Length + GoNoGoHeader.Length + FlankerHeader.Length) * 4;
 
 		// Add length of pretest data and then post test
-		int lineLength = InfoHeaderPre.Length + (StoopHeader.Length) * 1 + InfoHeaderPost.Length + (StoopHeader.Length) * 1;
+		int lineLength = InfoHeaderPre.Length + InfoHeaderPost.Length + (StoopHeader.Length) * 1 + (StoopHeader.Length) * 1;
 		header[0] = new string[lineLength];
 
 		// Adding prefixes to headers --- No dashes or commas allowed
@@ -227,13 +226,11 @@ public static class DataSaving {
 		// Copy over the pretest info headers
 		InfoHeaderPre.CopyTo (header [0], index);
 		index += InfoHeaderPre.Length;
+		InfoHeaderPost.CopyTo (header [0], index);
+		index += InfoHeaderPost.Length;
 		SPreIndex = index;
 		DN_PreHeader.CopyTo (header [0], index);
 		index += StoopHeader.Length;
-		
-		// Copy over the posttest info headers
-		InfoHeaderPost.CopyTo (header [0], index);
-		index += InfoHeaderPost.Length;		
 		SPostIndex = index;
 		DN_PostHeader.CopyTo (header [0], index);
 		index += StoopHeader.Length;

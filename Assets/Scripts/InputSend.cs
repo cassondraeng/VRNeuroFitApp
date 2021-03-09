@@ -6,7 +6,7 @@ using System;
 //same order as data_saving
 public enum HeaderType : int
 {
-    ID, Played_Before, Computer_Distance, DOB, Sex, Race, TypeRace,
+    ID, Played_Before, Computer_Distance, DOB, Sex, Race, RaceOther,
     Ethnicity, Year_in_School, Handedness, Vision, Major, Minor, GPA,
     QPA, SAT, ACT, Colorblind, TypeColorblind, Disorder, TypeDisorder,
     Exercise, TypeExercise, StartHrs, StartMins, StartAPM, StopHrs,
