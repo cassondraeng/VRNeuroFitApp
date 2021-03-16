@@ -419,8 +419,12 @@ public class main : MonoBehaviour
         S.inputSend.happy[(int) HeaderType.DOT] = DateTime.Now.ToString();
         var BetterHappy = S.inputSend.happy.Take(DataSaving.InfoHeaderPre.Length).ToArray();
 
+            //Reorganize Media question results
+            var t = S.MediaData.happy;
+            var media = new string[] { t[2], t[3], t[4], t[5], t[0], t[1] };
+
         DataSaving.CurrentTrialType = TrialType.Pretest;
-        DataSaving.SaveData(S.inputSend.happy[(int)HeaderType.ID], BetterHappy, S.MediaData.happy.Concat(S.PacesData.happy).Concat(S.NotAdrians.happy).Concat(info).Concat(S.AttentionData.happy).ToArray());
+        DataSaving.SaveData(S.inputSend.happy[(int)HeaderType.ID], BetterHappy, media.Concat(S.PacesData.happy).Concat(S.NotAdrians.happy).Concat(info).Concat(S.AttentionData.happy).ToArray());
 
     } else if (preOrPost == track.PostTest) {
         // stroop, attention, paces, mindfulness, demographics
