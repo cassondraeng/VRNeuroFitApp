@@ -25,16 +25,24 @@ public static class DataSaving {
 	// Task Data Headers -- NO IN-STRING COMMAS ALLOWED (And NO DASHES)
     //This is for the player info hahahahahaha
 	public static string[] InfoHeaderPre = {
-        "ID",                       "Played Before",    "Computer Distance"};
+        "ID",                       "Computer Distance", "DOT"};
 
 	public static string[] InfoHeaderPost = {
-        "DOB",
-        "Sex",                      "Race",             "RaceOther",             "Ethnicity",
-        "Year in School",           "Handedness",       "Vision",				"Major",
+        "DOB", "Age",
+        "Sex",                      "Race",             "RaceOther",             "Ethnicity", "Semester",
+        "Year in School",           "Vision",				"Major",
 		"Minor",					"GPA",				"QPA",					"SAT",
-		"ACT",						"Colorblind",       "TypeColorblind",		"Disorder",
-		"TypeDisorder",				"Exercise",         "TypeExercise",			"SleepTime",
-		"WakeTime",					"HoursSlept"};
+		"ACT",		"Handedness",       				"Colorblind",       "TypeColorblind",		"NeuroDisorder", "TypeDisorder",
+		"ADHD",	"ADHD Presentation",			"Exercise Frequency",    "Exercise Intensity",     "TypeExercise",			"SleepTime",
+		"WakeTime",					"HoursSlept", "PlayedBefore"};
+
+		//what cassie wants: id,distance, DOT, DOB, Age, sex, race, typerace,ethnicity, semester, yearinschoool, vision,major,minor,GPA,QPA,SAT,ACT,handedness,colorblind,typecolorblind,neruodisorder,typeidsorder,adhd,adhdpresentation,exercise freq, exercise intensity, type exercise, sleeptime, waketime, housrslept, playedbefore??
+
+		//TODO: ensure setting of playedbefore and id stuff is correct
+
+		//TODO: change order?
+		//pre:mediause, stroop, AT, mind, paces
+		//post: stroop, AT, mind, paces, media
 
 
 	// Revised data headers

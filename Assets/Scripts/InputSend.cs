@@ -6,12 +6,12 @@ using System;
 //same order as data_saving
 public enum HeaderType : int
 {
-    ID, Played_Before, Computer_Distance, DOB, Sex, Race, RaceOther,
-    Ethnicity, Year_in_School, Handedness, Vision, Major, Minor, GPA,
-    QPA, SAT, ACT, Colorblind, TypeColorblind, Disorder, TypeDisorder,
-    Exercise, TypeExercise, StartHrs, StartMins, StartAPM, StopHrs,
-    StopMins, StopAPM, HoursSlept
-}                         
+    ID, Computer_Distance, DOT, DOB, Age, Sex, Race, RaceOther,
+    Ethnicity, Semester, Year_in_School, Vision, Major, Minor, GPA,
+    QPA, SAT, ACT, Handedness, Colorblind, TypeColorblind, Disorder, TypeDisorder, ADHD, ADHDPresentation,
+    Exercise/*exercise freq*/, ExerciseIntensity, TypeExercise, StartHrs, StartMins, StartAPM, StopHrs,
+    StopMins, StopAPM, HoursSlept, Played_Before
+}
 
 [CreateAssetMenu(menuName ="holds_input_data")]
 public class InputSend : ScriptableObject

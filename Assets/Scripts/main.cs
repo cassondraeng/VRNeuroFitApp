@@ -416,8 +416,8 @@ public class main : MonoBehaviour
         // media exposure, paces, mindfulness, stroop, attention
         DataSaving.computerDistance = S.inputSend.happy[(int) HeaderType.Computer_Distance];
 
-        var BetterHappy = S.inputSend.happy.Take(3).ToArray();
-        // var BetterHappy = CalculateTime(S.inputSend.happy, track.Pretest);
+        S.inputSend.happy[(int) HeaderType.DOT] = DateTime.Now.ToString();
+        var BetterHappy = S.inputSend.happy.Take(DataSaving.InfoHeaderPre.Length).ToArray();
 
         DataSaving.CurrentTrialType = TrialType.Pretest;
         DataSaving.SaveData(S.inputSend.happy[(int)HeaderType.ID], BetterHappy, S.MediaData.happy.Concat(S.PacesData.happy).Concat(S.NotAdrians.happy).Concat(info).Concat(S.AttentionData.happy).ToArray());
@@ -431,8 +431,22 @@ public class main : MonoBehaviour
         DataSaving.birthdate = S.inputSend.happy[(int) HeaderType.DOB];
         DataSaving.computerDistance = S.inputSend.happy[(int) HeaderType.Computer_Distance];
 
+        // Calculate Age
+		DateTime result;
+		if (DateTime.TryParse (DataSaving.birthdate, out result)) {
+			// Compute age
+			DateTime today = DateTime.Today;
+			TimeSpan dayDiff = today.Subtract (result);
+			double years = dayDiff.TotalDays / 365.25;
+			S.inputSend.happy[(int) HeaderType.Age] = years.ToString ("##.###");
+		} else {
+			S.inputSend.happy[(int) HeaderType.Age] = "";
+		}
+
         var BetterHappy = CalculateTime(S.inputSend.happy, track.PostTest);
-        var newHappy = BetterHappy.Skip(3).ToArray();
+
+        // Remove pre-headers from demographics
+        var newHappy = BetterHappy.Skip(DataSaving.InfoHeaderPre.Length).ToArray();
 
         DataSaving.CurrentTrialType = TrialType.Posttest;
         DataSaving.SaveData(S.inputSend.happy[(int)HeaderType.ID], newHappy, info.Concat(S.AttentionData.happy).Concat(S.PacesData.happy).Concat(S.NotAdrians.happy).ToArray());
@@ -511,17 +525,22 @@ public class main : MonoBehaviour
             totalSlept = 12f - StartCongregate + StopCongregate;
         }
 
-        string[] newHappy;
-        if (preOrPost == track.Pretest) newHappy = new string[DataSaving.InfoHeaderPre.Length];
-        else newHappy = new string[DataSaving.InfoHeaderPost.Length];
+        // New array has 4 less elements than Happy (starthours/apm, endhours/apm)
+        string[] newHappy = new string[ogHappy.Length - 4];
+        // if (preOrPost == track.Pretest) newHappy = new string[DataSaving.InfoHeaderPre.Length];
+        // else newHappy = new string[DataSaving.InfoHeaderPost.Length];
 
-        for(int i = 0; i < newHappy.Length - 3; i++)
+        for(int i = 0; i < newHappy.Length - 4; i++)
         {
             newHappy[i] = ogHappy[i];
         }
-        newHappy[newHappy.Length - 3] = StartTime;
-        newHappy[newHappy.Length - 2] = StopTime;
-        newHappy[newHappy.Length - 1] = totalSlept.ToString();
+        // PlayedBefore is last entry
+        newHappy[newHappy.Length - 1] = ogHappy[ogHappy.Length - 1];
+
+
+        newHappy[newHappy.Length - 4] = StartTime;
+        newHappy[newHappy.Length - 3] = StopTime;
+        newHappy[newHappy.Length - 2] = totalSlept.ToString();
         return newHappy;
   }
 }
