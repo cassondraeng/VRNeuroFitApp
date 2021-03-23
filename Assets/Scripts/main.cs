@@ -315,18 +315,18 @@ public class main : MonoBehaviour
 
 
     public void start_test() {
-        trialInfo[] test = new trialInfo[2]; //24
-        buildTrial(1, 1); //(16,8)
+        trialInfo[] test = new trialInfo[24]; //24
+        buildTrial(16, 8); //(16,8)
         Anims.SetTrigger("Start Test");
-        StartCoroutine(DisplayStroop(2, test,true)); //24
+        StartCoroutine(DisplayStroop(24, test,true)); //24
     }
 
     public void start_trial()
     {
-        trialInfo[] tmp = new trialInfo[2]; //48
-        buildTrial(1,1); //(32,16)
+        trialInfo[] tmp = new trialInfo[48]; //48
+        buildTrial(32,16); //(32,16)
         trialCount++;
-        StartCoroutine(DisplayStroop(2, tmp,false)); //48
+        StartCoroutine(DisplayStroop(48, tmp,false)); //48
 
     }
 
