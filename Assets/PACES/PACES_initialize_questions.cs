@@ -8,6 +8,7 @@ public class PACES_initialize_questions : MonoBehaviour
 {
     [SerializeField] private questionaire_strings strings;
     [SerializeField] private PACES_indexes types;
+    [SerializeField] private GameObject questionPrompt;
     [SerializeField] private GameObject questionTypeOne_prefab;
     [SerializeField] private GameObject questionTypeTwo_prefab;
     [SerializeField] private Button next_button;
@@ -25,7 +26,10 @@ public class PACES_initialize_questions : MonoBehaviour
     {
         GetComponent<CanvasGroup>().alpha = 0;
         StartCoroutine(lerp_alpha());
-        for (int i = 0; i < strings.questions.Length; i++)
+
+        Instantiate(questionPrompt, transform);
+
+        for (int i = 1; i < strings.questions.Length; i++)
         {
             var q = Instantiate(new GameObject());
             if (types.indexes[i] == 0)

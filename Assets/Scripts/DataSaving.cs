@@ -34,7 +34,7 @@ public static class DataSaving {
 		"Minor",					"GPA",				"QPA",					"SAT",
 		"ACT",		"Handedness",       				"Colorblind",       "TypeColorblind",		"NeuroDisorder", "TypeDisorder",
 		"ADHD",	"ADHD Presentation",			"Exercise Frequency",    "Exercise Intensity",     "TypeExercise",			"SleepTime",
-		"WakeTime",					"HoursSlept", "PlayedBefore"}; //TODO: REMOVE PLAYEDBEFORE FROM HERE
+		"WakeTime",					"HoursSlept"}; //TODO: REMOVE PLAYEDBEFORE FROM HERE
 
 		//what cassie wants: id,distance, DOT, DOB, Age, sex, race, typerace,ethnicity, semester, yearinschoool, vision,major,minor,GPA,QPA,SAT,ACT,handedness,colorblind,typecolorblind,neruodisorder,typeidsorder,adhd,adhdpresentation,exercise freq, exercise intensity, type exercise, sleeptime, waketime, housrslept, playedbefore??
 
@@ -48,8 +48,8 @@ public static class DataSaving {
 	// Revised data headers
     //Make one of these for SaveFullTest
 	public static string[] StoopHeaderPre = { //TODO: AND PLACE IT HERE				
-		"S_Congruent_Correct",		"S_Congruent_Errors",			"S_Congruent_Accuracy",		"S_Congruent_RT",
-		"S_Incongruent_Correct",		"S_Incongruent_Errors",       "S_Incongruent_Accuracy",		"S_Incongruent_RT",
+		"S_Played_Before",				"S_Congruent_Correct",			"S_Congruent_Errors",			"S_Congruent_Accuracy",		"S_Congruent_RT",
+		"S_Incongruent_Correct",		"S_Incongruent_Errors",			"S_Incongruent_Accuracy",		"S_Incongruent_RT",
         "S_n_c_trials",               "S_n_i_trials"
 	};
 

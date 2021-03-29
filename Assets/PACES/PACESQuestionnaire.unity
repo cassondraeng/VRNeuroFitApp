@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5172549, y: 0}
   m_AnchorMax: {x: 0.5172549, y: 0}
-  m_AnchoredPosition: {x: 50, y: 0}
+  m_AnchoredPosition: {x: -32.83612, y: 0}
   m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!225 &95077602
@@ -186,6 +186,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strings: {fileID: 11400000, guid: a64f07e314c3b0f4dbeecea5ddd5c584, type: 2}
   types: {fileID: 11400000, guid: adb6bd8aa117cd14497092b2e9cc084f, type: 2}
+  questionPrompt: {fileID: 729947479332653737, guid: 3f971dd2b7002554cac54ea160e14b41,
+    type: 3}
   questionTypeOne_prefab: {fileID: 729947479332653737, guid: 8d5715a13704fcc4ebeba235be7075fc,
     type: 3}
   questionTypeTwo_prefab: {fileID: 3751141678443140857, guid: 1c210b0ba45fb7b4cb8c3ba454610668,
@@ -730,7 +732,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1696500223}
   m_HandleRect: {fileID: 1696500222}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
