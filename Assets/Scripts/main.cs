@@ -93,6 +93,8 @@ public class main : MonoBehaviour
     private Color[] colors = { Color.red, Color.green, Color.cyan, Color.yellow };
     private string[] words = { "RED", "GREEN", "BLUE", "YELLOW" };
 
+    private int times_initialized_headers = 0;
+
     //Singleton
     public static main S;
 
@@ -106,7 +108,10 @@ public class main : MonoBehaviour
     }
 
     void Awake() {
-        if (S == null) S = this;
+        if (S == null) {
+            S = this;
+            initializeHeaders();
+        }
     }
 
     // Start is called before the first frame update
@@ -330,20 +335,43 @@ public class main : MonoBehaviour
 
     }
 
-  //Writing out pseudo in meantime
-  //trialInfo[i] has: [w,color,responseTime, correct, noResponse, isCongruent]
+    //Writing out pseudo in meantime
+    //trialInfo[i] has: [w,color,responseTime, correct, noResponse, isCongruent]
 
-  //Congruent_correct   = [isCongruent=true, correct true]
-  //Congruent_errors    = [isCongruent=true, correct false]
-  //Congruent_accuracy  = Congruent_correct / trialInfo.Length
-  //Congruent_RT        = SUM[isCongruent=true,responseTime] / trialInfo.Length
+    //Congruent_correct   = [isCongruent=true, correct true]
+    //Congruent_errors    = [isCongruent=true, correct false]
+    //Congruent_accuracy  = Congruent_correct / trialInfo.Length
+    //Congruent_RT        = SUM[isCongruent=true,responseTime] / trialInfo.Length
 
-  //Just a thought,split trialInfo into chunks of congruent and incongruent for storing this data.
+    //Just a thought,split trialInfo into chunks of congruent and incongruent for storing this data.
 
-  //Incongruent_correct = [isCongruent=false, correct true]
-  //Incongruent_errors  = [isCongruent=false, correct false]
-  //Incongruent_accuracy= Congruent_false / trialInfo.Length
-  //Incongruent_RT      = SUM[isCongruent=true,responseTime] / trialInfo.Length
+    //Incongruent_correct = [isCongruent=false, correct true]
+    //Incongruent_errors  = [isCongruent=false, correct false]
+    //Incongruent_accuracy= Congruent_false / trialInfo.Length
+    //Incongruent_RT      = SUM[isCongruent=true,responseTime] / trialInfo.Length
+
+    // Initializing headers
+    public void initializeHeaders() {
+        //Debug.Log("HEADERS GETTING INITIALIZED");
+
+        times_initialized_headers++;
+        if (times_initialized_headers > 1) {
+            Debug.LogWarning("You tried intializing headers more than once! Nonono");
+            return;
+        }
+
+        // Initialize data headers
+        var no_commas = S.questions.questions.Select(s => String.Concat("MIND_", String.Concat(s.Where<char>(c => c != ','))));
+        var media_no_commas = S.MediaQuestions.questions.Select(s => String.Concat("MediaUse_", String.Concat(s.Where<char>(c => c != ',')))); //new
+        var attention_no_commas = S.AttentionQuestions.questions.Select(s => String.Concat("AT_", String.Concat(s.Where<char>(c => c != ',')))); //new
+        var paces_no_commas = S.PacesQuestions.questions.Select(s => String.Concat("PACES_", String.Concat(s.Where<char>(c => c != ',')))); //new
+
+        var oldPreHeader = DataSaving.StoopHeaderPre;
+        DataSaving.StoopHeaderPre = media_no_commas.Concat(paces_no_commas).Concat(no_commas).Concat(oldPreHeader).Concat(attention_no_commas).ToArray();
+
+        var oldPostHeader = DataSaving.StoopHeaderPost;
+        DataSaving.StoopHeaderPost = oldPostHeader.Concat(attention_no_commas).Concat(paces_no_commas).Concat(no_commas).ToArray();
+    }
 
   // Save the averaged data over ALL trials and ALL blocks of this test
   public void saveFullTest() {
@@ -397,18 +425,7 @@ public class main : MonoBehaviour
         DateTime timeStart, timeStop = DateTime.Today;
 
 
-
-        // Initialize data headers
-        var no_commas = S.questions.questions.Select(s => String.Concat("MIND_",String.Concat(s.Where<char>(c => c != ','))));
-        var media_no_commas = S.MediaQuestions.questions.Select(s => String.Concat("MediaUse_",String.Concat(s.Where<char>(c => c != ',')))); //new
-        var attention_no_commas = S.AttentionQuestions.questions.Select(s => String.Concat("AT_",String.Concat(s.Where<char>(c => c != ',')))); //new
-        var paces_no_commas = S.PacesQuestions.questions.Select(s => String.Concat("PACES_",String.Concat(s.Where<char>(c => c != ',')))); //new
-
-        var oldPreHeader = DataSaving.StoopHeaderPre;
-        DataSaving.StoopHeaderPre = media_no_commas.Concat(paces_no_commas).Concat(no_commas).Concat(oldPreHeader).Concat(attention_no_commas).ToArray();
-
-        var oldPostHeader = DataSaving.StoopHeaderPost;
-        DataSaving.StoopHeaderPost = oldPostHeader.Concat(attention_no_commas).Concat(paces_no_commas).Concat(no_commas).ToArray();
+        // Where headers USED to be initalized
 
 
     // Save diff data for pre or post
