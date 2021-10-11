@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PrePost : MonoBehaviour
 {
 
-    public Dropdown dropdown;
+    private Dropdown dropdown;
     private main script;
 
     private void Start() {
