@@ -12181,7 +12181,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Back to Lobby
+  m_Text: 'Save and Quit
+
+'
 --- !u!222 &643153567
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24911,7 +24913,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416d50618b401b74b9a08f6ac63a96bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: LOBBY
+  scene: INTRO
+  prepostMenu: {fileID: 0}
+  dropdown: {fileID: 0}
 --- !u!114 &1323296819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24968,6 +24972,28 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1323296817}
         m_MethodName: DoIt
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1405925743}
+        m_MethodName: saveFullTest
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1405925742}
+        m_MethodName: GameExit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -26391,6 +26417,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1388857986}
   m_CullTransparentMesh: 0
+--- !u!1 &1405925741
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1405925744}
+  - component: {fileID: 1405925743}
+  - component: {fileID: 1405925742}
+  m_Layer: 0
+  m_Name: fakemain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1405925742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405925741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac64f970882b247be9bee8f1f3fede12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1405925743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405925741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0352677f9ae6a7e4586b7bf37f6d3a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  banana: 0000000000000000
+  Cross: {fileID: 0}
+  WordManager: {fileID: 0}
+  Correct: {fileID: 0}
+  Wrong: {fileID: 0}
+  Anims: {fileID: 0}
+  RestScreen: {fileID: 0}
+  NextScreen: {fileID: 0}
+  inputSend: {fileID: 11400000, guid: 251e14f9bd9854c648a31cea4c6e19a3, type: 2}
+  NotAdrians: {fileID: 11400000, guid: 3a29541e98accb941a52b17f63199b76, type: 2}
+  MediaData: {fileID: 11400000, guid: 189e0955e8c38ae4097aa02369857e1f, type: 2}
+  questions: {fileID: 11400000, guid: b475818d537f6a74280b4090c1acb84e, type: 2}
+  MediaQuestions: {fileID: 11400000, guid: 03505481e0fa19e4293028ba562df8fb, type: 2}
+  AttentionData: {fileID: 11400000, guid: 7efb6d0dc0bdde646afad0c6e5182f86, type: 2}
+  AttentionQuestions: {fileID: 11400000, guid: 0bb660d3e40db7b449bf4dead2e35889, type: 2}
+  PacesData: {fileID: 0}
+  PacesQuestions: {fileID: 0}
+  ExperimenterInput: {fileID: 0}
+  PlayerInput: {fileID: 0}
+  trialCount: 0
+--- !u!4 &1405925744
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405925741}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 334.6175, y: 210.34793, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1408090493
 GameObject:
   m_ObjectHideFlags: 0
