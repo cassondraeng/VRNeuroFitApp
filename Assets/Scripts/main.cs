@@ -46,11 +46,11 @@ public class main : MonoBehaviour
         if (banana[(int)main.track.Pretest]) {
             if (banana[(int)main.track.Media] && banana[(int)main.track.PACES] && banana[(int)main.track.Mindful] && banana[(int)main.track.Stroop] && banana[(int)main.track.Attention])
             // media exposure, paces, mindfulness, stroop, attention
-            saveFullTest();
+            hackyFix();
         } else if (banana[(int)main.track.PostTest]) {
             if (banana[(int)main.track.Stroop] && banana[(int)main.track.Attention] && banana[(int)main.track.PACES] && banana[(int)main.track.Mindful] && banana[(int)main.track.Demographics])
             // stroop, attention, paces, mindfulness, demographics
-            saveFullTest();
+            hackyFix();
         }
     }
     #endregion
@@ -373,10 +373,25 @@ public class main : MonoBehaviour
         DataSaving.StoopHeaderPost = oldPostHeader.Concat(attention_no_commas).Concat(paces_no_commas).Concat(no_commas).ToArray();
     }
 
+    //in spirit of the coding style, I will not leave any helpful comments 
+    public void hackyFix()
+    {
+        track preOrPost = S.banana[(int)main.track.Pretest] == true ? track.Pretest : track.PostTest;
+        if (preOrPost == track.Pretest)
+        {
+            saveFullTest(preOrPost);
+            saveFullTest(track.PostTest);
+        }
+        else
+        {
+            saveFullTest(preOrPost);
+        }
+    }
+
   // Save the averaged data over ALL trials and ALL blocks of this test
-  public void saveFullTest() {
+  public void saveFullTest(track preOrPost) {
     // Save the full test data
-    track preOrPost = S.banana[(int)main.track.Pretest] == true ? track.Pretest : track.PostTest;
+    //track preOrPost = S.banana[(int)main.track.Pretest] == true ? track.Pretest : track.PostTest;
 
         //Data to collect throughout running of algorithm
         int c_c = 0;

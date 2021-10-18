@@ -134,14 +134,14 @@ public static class DataSaving {
 				Debug.LogError ("Unexpected data array length for Stroop task data saving");
 			}
 		    colIndex = SPreIndex;
-			infoData.CopyTo(AllData[lineIndex], InfoHeaderPre.Length);
+			//infoData.CopyTo(AllData[lineIndex], InfoHeaderPre.Length);
 		} else if (CurrentTrialType == TrialType.Posttest) {
 			if (newData.Length != StoopHeaderPost.Length) {
 				Debug.LogError ("Unexpected data array length for Stroop task data saving");
 			}
 		    colIndex = SPostIndex;
 			// copies posttest DEMOGRAPHIC data here
-			//infoData.CopyTo (AllData [lineIndex], InfoHeaderPre.Length);
+			infoData.CopyTo(AllData [lineIndex], InfoHeaderPre.Length);
 	    } // else if (CurrentTrialType == TrialType.DelayedTest) {
 		//     colIndex = SDelayIndex;
 	    // } else if (CurrentTrialType == TrialType.Delayed2Test) {
