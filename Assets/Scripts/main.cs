@@ -72,7 +72,7 @@ public class main : MonoBehaviour
     public questionaire_strings AttentionQuestions; // new
     public InputSend PacesData; // new
     public questionaire_strings PacesQuestions; // new
-
+    public int numberOfTrails = 3; // new MKomar
     //Objects interacted with to record experiment info (credentials, user info)
     public GameObject ExperimenterInput;
     public GameObject PlayerInput;
@@ -321,18 +321,18 @@ public class main : MonoBehaviour
 
 
     public void start_test() {
-        trialInfo[] test = new trialInfo[24]; //24
+        trialInfo[] test = new trialInfo[numberOfTrails * 2]; //24
         buildTrial(16, 8); //(16,8)
         Anims.SetTrigger("Start Test");
-        StartCoroutine(DisplayStroop(24, test,true)); //24
+        StartCoroutine(DisplayStroop(numberOfTrails, test,true)); //24
     }
 
     public void start_trial()
     {
-        trialInfo[] tmp = new trialInfo[48]; //48
+        trialInfo[] tmp = new trialInfo[numberOfTrails * 2]; 
         buildTrial(32,16); //(32,16)
         trialCount++;
-        StartCoroutine(DisplayStroop(48, tmp,false)); //48
+        StartCoroutine(DisplayStroop(numberOfTrails * 2, tmp,false)); //48
 
     }
 
@@ -374,7 +374,7 @@ public class main : MonoBehaviour
         DataSaving.StoopHeaderPost = oldPostHeader.Concat(attention_no_commas).Concat(paces_no_commas).Concat(no_commas).ToArray();
     }
 
-    //in spirit of the coding style, I will not leave any helpful comments 
+    //in spirit of the coding style, I will not leave any helpful comments -- Sebastian Yang, President of GCS
     public void hackyFix()
     {
         track preOrPost = S.banana[(int)main.track.Pretest] == true ? track.Pretest : track.PostTest;
@@ -395,17 +395,17 @@ public class main : MonoBehaviour
     //track preOrPost = S.banana[(int)main.track.Pretest] == true ? track.Pretest : track.PostTest;
 
         //Data to collect throughout running of algorithm
-        int c_c = 0;
-        int c_e = 0;
-        int ic_c = 0;
-        int ic_e = 0;
+        float c_c = 0.0f;
+        float c_e = 0.0f;
+        float ic_c = 0.0f;
+        float ic_e = 0.0f;
 
         float cRT_total = 0f;
         float iRT_total = 0f;
 
         //5*48 (160 congruent, 80 incongruent)
-        int n_c_trials = 160;
-        int n_i_trials = 80;
+        float n_c_trials = 160.0f;
+        float n_i_trials = 80.0f;
         foreach(trialInfo[] t in S.blocks)
         {
             foreach(trialInfo i in t)
