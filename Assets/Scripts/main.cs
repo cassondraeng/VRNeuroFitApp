@@ -293,7 +293,7 @@ public class main : MonoBehaviour
             //saveFullTest();
         }
         //Add this trial to blocks
-        if (!isTest) blocks.Add(info);
+        if (!isTest) S.blocks.Add(info);
 
         yield return null;
     }
@@ -304,6 +304,7 @@ public class main : MonoBehaviour
         if (b)
         {
             Correct.SetActive(true);
+
             yield return new WaitForSeconds(rwTime);
             Correct.SetActive(false);
         }
