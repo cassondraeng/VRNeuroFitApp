@@ -72,7 +72,8 @@ public class main : MonoBehaviour
     public questionaire_strings AttentionQuestions; // new
     public InputSend PacesData; // new
     public questionaire_strings PacesQuestions; // new
-    public int numberOfTrails = 3; // new MKomar
+    // Scaled by 2 during the actual trial
+    public int numberOfTrails = 3; // How is this working???
     //Objects interacted with to record experiment info (credentials, user info)
     public GameObject ExperimenterInput;
     public GameObject PlayerInput;
@@ -121,6 +122,9 @@ public class main : MonoBehaviour
         if (S == this) DontDestroyOnLoad(this);
     }
 
+    // buildTrial builds a single stroop level
+    // con: # of congruent trials
+    // incon: # of incongruent trials  
     private void buildTrial(int con, int incon)
     {
         System.Random rand = new System.Random();
@@ -284,8 +288,9 @@ public class main : MonoBehaviour
             if (!isTest) saveSingleTrial(info[i]);
             yield return new WaitForSeconds(0.2f);
         }
-        //If this is not the final task, prepare to reset. Else don't reset.
-        if (trialCount < 5)
+        // If this is not the final task, prepare to reset. Else don't reset.
+        // June 2, 2023 Change: Only doing 3 trials instead of 5 (I don't know if this is going to work, but we'll find out)
+        if (trialCount < 3)
             Anims.SetTrigger("trialDone");
         else
         {
@@ -321,6 +326,8 @@ public class main : MonoBehaviour
 
 
     public void start_test() {
+        // Is numberofTrails * 2 working? 3 * 2 != 24
+        // Theoretically, should numberofTrails be 24? And then start_trial multiples it by 2?
         trialInfo[] test = new trialInfo[numberOfTrails * 2]; //24
         buildTrial(16, 8); //(16,8)
         Anims.SetTrigger("Start Test");
@@ -329,6 +336,7 @@ public class main : MonoBehaviour
 
     public void start_trial()
     {
+        // Same here?
         trialInfo[] tmp = new trialInfo[numberOfTrails * 2]; 
         buildTrial(32,16); //(32,16)
         trialCount++;
@@ -404,8 +412,9 @@ public class main : MonoBehaviour
         float iRT_total = 0f;
 
         //5*48 (160 congruent, 80 incongruent)
-        float n_c_trials = 160.0f;
-        float n_i_trials = 80.0f;
+        // June 2, 2023 Change: 3*48 = 144 Trials total (96 congruent, 48 incongruent)
+        float n_c_trials = 96.0f;
+        float n_i_trials = 48.0f;
         foreach(trialInfo[] t in S.blocks)
         {
             foreach(trialInfo i in t)
