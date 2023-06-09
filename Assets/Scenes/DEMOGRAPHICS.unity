@@ -2073,7 +2073,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter type...
+  m_Text: Enter type with no punctation (.,;)...
 --- !u!222 &54563951
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3494,7 +3494,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Date of Birth: '
+  m_Text: 'Date of Birth (DD/MM/YYYY): '
 --- !u!222 &128418125
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3696,7 +3696,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter type...
+  m_Text: Enter type with no punctation (.,;)...
 --- !u!222 &138427303
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8647,7 +8647,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter text...(no commas, use spaces to separate only)
+  m_Text: Enter text...(Please do NOT use punctuation, use spaces to separate only)
 --- !u!222 &430499613
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -26425,7 +26425,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: (OPTIONAL)
+  m_Text: (Out of 4.0, 1600, or 36)
 --- !u!222 &1408090496
 CanvasRenderer:
   m_ObjectHideFlags: 0
